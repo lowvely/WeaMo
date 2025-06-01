@@ -1,0 +1,108 @@
+/* Global Reset */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: #060C1A;
+  height: 100%;
+  width: 100%;
+}
+
+html {
+  height: 100%;
+  width: 100%;
+}
+
+.main-container {
+  position: relative;
+  display: grid;
+  grid-template-areas:
+      "side-panel cloud-image cloud-image cloud-image"
+      "side-panel cloud-image cloud-image cloud-image"
+      "side-panel cloud-image cloud-image cloud-image";
+  grid-template-columns: 5% 35% 30% 23%;
+  grid-template-rows: 40% 20% 30%;
+  row-gap: 2%;
+  column-gap: 1%;
+  top: 7.5%;
+  left: 3%;
+  width: 94%;
+  height: 90%;
+  justify-content: center;
+}
+
+.main-container > div {
+  background-color: #121A2C;
+  padding: 2%;
+  border-radius: 20px;
+  color: white;
+}
+
+.main-container > .side-panel { grid-area: side-panel; }
+.main-container > .cloud-image { grid-area: cloud-image; }
+
+/* SIDE PANEL */
+.side-panel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow: hidden;
+}
+
+.logoIcon {
+  width: 100%;
+  height: auto;
+}
+
+.weamoText {
+  font-family: "Poppins";
+  font-size: .7vw;
+  margin-top: -15%;
+}
+
+.sideLine {
+  margin-top: -3px;
+  margin-bottom: 5px;
+  font-size: .9vw;
+  color: #16274B;
+}
+
+.side-panel-icon {
+  width: 115%;
+  height: auto;
+  padding: 15%;
+}
+
+.home,
+.calendar,
+.clouds {
+  display: flex;
+  justify-content: center;
+}
+
+.home:hover,
+.calendar:hover{
+  cursor: pointer;
+  filter: brightness(0) invert(1);
+}
+
+.clouds {
+  cursor: pointer;
+  border-radius: 20px;
+  filter: brightness(0) invert(1);
+}
+
+.cloud-image {
+  background: url('altocumulus.jpg');
+  background-size: cover; 
+  background-position: center;
+  width: 100%;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+}

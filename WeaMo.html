@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>WeaMo</title>
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700;800&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="WeaMo_Styles.css">
+    </head>
+
+
+    <body>
+        <div class = "main-container">
+            <!-- Side Panel -->
+            <div class="side-panel">
+                <div class="logo">
+                    <img class="logoIcon" src="png/Sunny.png">
+                </div>
+                <div class="weamoText">WeaMo</div>
+                <div class="sideLine">________</div>
+                <a href="WeaMo.html">
+                <div class="home">
+                    <img class="side-panel-icon" src="png/home.png">
+                </div>
+                </a>
+                <!-- <div class="calendar">
+                    <img class="side-panel-icon" src="png/calendar.png">
+                </div> -->
+                <a href="clouds.html">
+                <div class="clouds">
+                    <img class="side-panel-icon" src="png/clouds.png">
+                </div>
+                </a>
+                <div class="mode"></div>
+            </div>
+
+            <!-- Current Weather -->
+             <div class="box1">
+                <div class="box1Details">
+                    <div class="box1Top">
+                        <div class="location">
+                            <img src="png/location.png"> 
+                            <div>Visayan Village, Tagum City</div>
+                        </div>
+                        <div class="date"></div>
+                        <div id="time"></div>
+                    </div>
+                    <div class="condition">Outcast</div>
+                    <div class="temp">25°</div>
+                    </div>
+                <div class="box1Icon">
+                    <img class="forecastImage" src="png/forecastIcon.png">
+                </div>
+             </div>
+
+            <!-- Today's Forecast -->
+            <div class = "box2">
+                <div class="box2Title">TODAY'S FORECAST</div>
+                <div class="forecastContainer">
+                    <div class="forecast">
+                        <div class="Time1">7:00 AM</div>
+                        <div class="weatherType1">Rainy</div>
+                        <div class="weatherIcon1">
+                            <img class="weather-icon" src="png/rainyIcon.png">
+                        </div>
+                    </div>
+                    <div class="forecast">
+                        <div class="Time2">8:00 AM</div>
+                        <div class="weatherType2">Outcast</div>
+                        <div class="weatherIcon2">
+                            <img class="weather-icon" src="png/forecastIcon.png">
+                        </div>
+                    </div>
+                    <div class="forecast">
+                        <div class="Time3">9:00 AM</div>
+                        <div class="weatherType3">Outcast</div>
+                        <div class="weatherIcon3">
+                            <img class="weather-icon" src="png/forecastIcon.png">
+                        </div>
+                    </div>
+                    <div class="forecast">
+                        <div class="Time4">10:00 AM</div>
+                        <div class="weatherType4">Sunny</div>
+                        <div class="weatherIcon4">
+                            <img class="weather-icon" src="png/forecastIcon.png">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Today's Highlight -->
+            <div class = "box3">
+                <div class="box3Title">Today's Highlight</div>
+                <div class="highlightContainer">
+                    <!-- Wind Speed -->
+                    <div class="highlightRow">
+                        <div class="box3Icon">
+                            <img class ="highlightIcon" src="png/wind.png">
+                        </div>
+                        <div class="title">
+                            <div class="name">Wind Speed</div>
+                            <div class="measurement">5 km/s</div>
+                        </div>
+                        <div class="line"></div>
+                    </div>
+                    <!-- Humidity -->
+                    <div class="highlightRow">
+                        <div class="box3Icon">
+                            <img class ="highlightIcon" src="png/humidity.png">
+                        </div>
+                        <div class="title">
+                            <div class="name">Humidity</div>
+                            <div class="measurement">59%</div>
+                        </div>
+                        <div class="line"></div>
+                    </div>
+                    <!-- Temperature -->
+                    <div class="highlightRow">
+                        <div class="box3Icon">
+                            <img class ="highlightIcon" src="png/thermometer.png">
+                        </div>
+                        <div class="title">
+                            <div class="name">Temperature</div>
+                            <div class="measurement">29°</div>
+                        </div>
+                        <div class="line"></div>
+                    </div>
+                    <!-- Pressure -->
+                    <div class="highlightRow">
+                        <div class="box3Icon">
+                            <img class ="highlightIcon" src="png/pressure.png">
+                        </div>
+                        <div class="title">
+                            <div class="name">Pressure</div>
+                            <div class="measurement">1015 mbar</div>
+                        </div>
+                        <div class="line invisible"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Cloud Image -->
+            <a class = "box4-link" href="clouds.html">
+            <div class = "box4">
+                <div class="cloud-label">Cloud Type: Altocumulus</div>
+            </div>
+            </a>
+
+            <!-- Overview -->
+            <div class = "box5">
+                <div class="box5Title">Overview</div>
+                <div class="graph"></div>
+            </div>
+        </div>
+
+        <script src="WeaMo-js.js"></script>
+   </body>
+</html>
