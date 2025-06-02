@@ -56,9 +56,11 @@
 #switch svg:last-child{
   display: none;
 }
+
 .lightmode #switch svg:first-child{
   display: none;
 }
+
 .lightmode #switch svg:last-child{
   display: block;
 }
@@ -78,6 +80,7 @@ body {
   width: 100%;
 }
 
+/* CONTAINER */
 .main-container {
   position: relative;
   display: grid;
@@ -150,6 +153,7 @@ body {
   fill: var(--side-icon-clicked);
 }
 
+/* CLOUD IMAGE */
 .cloud-image {
   background: url('altocumulus.jpg');
   background-size: cover; 
