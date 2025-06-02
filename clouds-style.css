@@ -36,8 +36,8 @@
 
 #switch{
   all: unset;
-  height: 5.5vh;
-  width: 5.5vh;
+  height: 3.1vw;
+  width: 3.1vw;
   padding: 0;
   border-radius: 50%;
   background-color: var(--main-bg-color);
@@ -136,7 +136,7 @@ body {
 }
 
 .sideIcon {
-  width: 4vh;
+  width: 3.8vh;
   height: auto;
 }
 
@@ -162,4 +162,15 @@ body {
   height: 100%;
   position: relative;
   overflow: hidden;
+}
+
+@media only screen and (max-width: 1080px){
+  * {
+    transition: all 0.3s ease;
+  }
+
+  .main-container {
+    grid-template-columns: 8% 20% 20% 35%;
+    grid-template-rows: 30% 15% 20%;
+  }
 }

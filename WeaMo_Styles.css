@@ -40,8 +40,8 @@
 
 #switch{
   all: unset;
-  height: 5.5vh;
-  width: 5.5vh;
+  height: 3.1vw;
+  width: 3.1vw;
   padding: 0;
   border-radius: 50%;
   background-color: var(--main-bg-color);
@@ -140,7 +140,7 @@ html, body {
 }
 
 .sideIcon {
-  width: 4vh;
+  width: 3.8vh;
   height: auto;
 }
 
@@ -191,6 +191,8 @@ html, body {
 
 .location svg {
   fill: var(--text-color);
+  width: 10%;
+  height: auto;
 }
 
 .date,
@@ -329,6 +331,8 @@ html, body {
 
 .highlight-icon svg{
   fill: var(--icon-color);
+  width: 3vw;
+  height: auto;
 }
 
 /* CLOUD IMAGE */
@@ -371,7 +375,7 @@ html, body {
   margin-bottom: 1.5%;
 }
 
-@media only screen and (max-width: 1280px){
+@media only screen and (max-width: 1080px){
   * {
     transition: all 0.3s ease;
   }
