@@ -3,41 +3,42 @@
     <head>
         <title>WeaMo</title>
         <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700;800&display=swap" rel="stylesheet">
-        <link rel="stylesheet" href="WeaMo_Styles.css?v=1">
+        <link rel="stylesheet" href="WeaMo_Styles.css?v=2">
     </head>
-
 
     <body>
         <div class = "main-container">
             <!-- Side Panel -->
-            <div class="side-panel">
+            <div class="side-panel-container">
                 <div class="logo">
                     <img class="logoIcon" src="png/Sunny.png">
                 </div>
-                <div class="weamoText">WeaMo</div>
-                <div class="sideLine">________</div>
-                <a href="WeaMo.html">
+                <div class="website-name">WeaMo</div>
+                <div class="side-line">________</div>
+                <a href="index.html">
                 <div class="home">
-                    <img class="side-panel-icon" src="png/home.png">
+                    <svg class="sideIcon" xmlns="http://www.w3.org/2000/svg" height="30px" viewBox="0 -960 960 960" width="30px" fill="#e3e3e3"><path d="M540-600v-200h260v200H540ZM160-480v-320h260v320H160Zm380 320v-320h260v320H540Zm-380 0v-200h260v200H160Z"/></svg>
                 </div>
                 </a>
-                <!-- <div class="calendar">
-                    <img class="side-panel-icon" src="png/calendar.png">
-                </div> -->
                 <a href="clouds.html">
                 <div class="clouds">
-                    <img class="side-panel-icon" src="png/clouds.png">
+                    <svg class="sideIcon" xmlns="http://www.w3.org/2000/svg" height="30px" viewBox="0 -960 960 960" width="30px" fill="#e3e3e3"><path d="M260-200q-74.85 0-127.42-52.23Q80-304.46 80-379.31q0-68.77 47-122.07 47-53.31 116.85-57.24Q257.31-646 324.23-703q66.92-57 155.77-57 100.08 0 170.04 69.96T720-520v40h24.62q57.46 1.85 96.42 42.19Q880-397.46 880-340q0 58.85-40.58 99.42Q798.85-200 740-200H260Z"/></svg>
                 </div>
                 </a>
-                <div class="mode"></div>
+                <div class="theme-switch">
+                    <button id="switch">
+                        <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"><path d="M480-120q-150 0-255-105T120-480q0-150 105-255t255-105q14 0 27.5 1t26.5 3q-41 29-65.5 75.5T444-660q0 90 63 153t153 63q55 0 101-24.5t75-65.5q2 13 3 26.5t1 27.5q0 150-105 255T480-120Z"/></svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"><path d="M480-280q-83 0-141.5-58.5T280-480q0-83 58.5-141.5T480-680q83 0 141.5 58.5T680-480q0 83-58.5 141.5T480-280ZM200-440H40v-80h160v80Zm720 0H760v-80h160v80ZM440-760v-160h80v160h-80Zm0 720v-160h80v160h-80ZM256-650l-101-97 57-59 96 100-52 56Zm492 496-97-101 53-55 101 97-57 59Zm-98-550 97-101 59 57-100 96-56-52ZM154-212l101-97 55 53-97 101-59-57Z"/></svg>
+                    </button>
+                </div>
             </div>
 
-            <!-- Current Weather -->
-             <div class="box1">
-                <div class="box1Details">
-                    <div class="box1Top">
-                        <div class="location">
-                            <img src="png/location.png"> 
+            <!-- Current Forecast -->
+             <div class="current-forecast-container">
+                <div class="forecast-details">
+                    <div class="top-container">
+                        <div class="location"> 
+                            <svg class="location-icon" xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="20px" fill="#e3e3e3"><path d="M480.35-490.77q23.5 0 39.88-16.73 16.39-16.74 16.39-40.23 0-23.5-16.74-39.89Q503.15-604 479.65-604q-23.5 0-39.88 16.73-16.39 16.74-16.39 40.23 0 23.5 16.74 39.89 16.73 16.38 40.23 16.38ZM480-135.23q-136.98-118.8-206.41-221.63-69.44-102.83-69.44-188.29 0-110.93 75.16-194.89Q354.46-824 479.5-824q125.04 0 200.69 83.96 75.66 83.96 75.66 194.89 0 85.46-68.93 187.84Q618-254.92 480-135.23Z"/></svg>
                             <div>Cuambogan, Tagum City</div>
                         </div>
                         <div class="date"></div>
@@ -46,40 +47,40 @@
                     <div class="condition">Outcast</div>
                     <div class="temp">25°</div>
                     </div>
-                <div class="box1Icon">
+                <div class="current-forecast-icon">
                     <img class="forecastImage" src="png/forecastIcon.png">
                 </div>
              </div>
 
             <!-- Today's Forecast -->
-            <div class = "box2">
-                <div class="box2Title">TODAY'S FORECAST</div>
-                <div class="forecastContainer">
-                    <div class="forecast">
+            <div class = "todays-forecast-container">
+                <div class="todays-forecast-title">TODAY'S FORECAST</div>
+                <div class="details-container">
+                    <div class="todays-forecast">
                         <div class="Time1">7:00 AM</div>
-                        <div class="weatherType1">Rainy</div>
-                        <div class="weatherIcon1">
+                        <div class="weather-type1">Rainy</div>
+                        <div class="weather-icon1">
                             <img class="weather-icon" src="png/rainyIcon.png">
                         </div>
                     </div>
-                    <div class="forecast">
+                    <div class="todays-forecast">
                         <div class="Time2">8:00 AM</div>
-                        <div class="weatherType2">Outcast</div>
-                        <div class="weatherIcon2">
+                        <div class="weather-type2">Outcast</div>
+                        <div class="weather-icon2">
                             <img class="weather-icon" src="png/forecastIcon.png">
                         </div>
                     </div>
-                    <div class="forecast">
+                    <div class="todays-forecast">
                         <div class="Time3">9:00 AM</div>
-                        <div class="weatherType3">Outcast</div>
-                        <div class="weatherIcon3">
+                        <div class="weather-type3">Outcast</div>
+                        <div class="weather-icon3">
                             <img class="weather-icon" src="png/forecastIcon.png">
                         </div>
                     </div>
-                    <div class="forecast">
+                    <div class="todays-forecast">
                         <div class="Time4">10:00 AM</div>
-                        <div class="weatherType4">Sunny</div>
-                        <div class="weatherIcon4">
+                        <div class="weather-type4">Sunny</div>
+                        <div class="weather-icon4">
                             <img class="weather-icon" src="png/forecastIcon.png">
                         </div>
                     </div>
@@ -87,13 +88,13 @@
             </div>
 
             <!-- Today's Highlight -->
-            <div class = "box3">
-                <div class="box3Title">Today's Highlight</div>
-                <div class="highlightContainer">
+            <div class = "todays-highlight-container">
+                <div class="todays-highlight-title">Today's Highlight</div>
+                <div class="highlight-container">
                     <!-- Wind Speed -->
-                    <div class="highlightRow">
-                        <div class="box3Icon">
-                            <img class ="highlightIcon" src="png/wind.png">
+                    <div class="highlight-row">
+                        <div class="highlight-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" height="40px" viewBox="0 -960 960 960" width="40px" fill="#e3e3e3"><path d="M461.79-189.23q-37.28 0-63.41-20.97-26.12-20.98-33.05-56.93h38.16q5.64 20.69 20.86 32.37 15.21 11.68 37.44 11.68 27.77 0 45.43-17.73 17.65-17.73 17.65-46.32t-17.65-46.81q-17.66-18.21-45.43-18.21H100V-386h361.79q42.67 0 69.8 27.13 27.13 27.13 27.13 71.74 0 43.64-27.13 70.77-27.13 27.13-69.8 27.13ZM100-573.03v-33.84h522.26q37.43 0 60.59-23.23Q706-653.33 706-691.9q0-38.56-23.15-61.79-23.16-23.23-60.59-23.23-32.47 0-53.57 18.05t-26.74 45.84h-35.39q6.93-43.46 38.5-70.6 31.58-27.14 77.2-27.14 51.36 0 84.47 33.19 33.12 33.2 33.12 85.68 0 52.49-33.12 85.68-33.11 33.19-84.47 33.19H100Zm663.9 312.31v-35.38q28.41-6.16 45.33-27.9 16.92-21.74 16.92-54.05 0-37.59-23.64-60.74-23.64-23.16-60.25-23.16H100v-33.84h642.26q52.02 0 84.88 33.11Q860-429.56 860-378.05q0 46.43-25.76 78.42-25.75 31.99-70.34 38.91Z"/></svg>
                         </div>
                         <div class="title">
                             <div class="name">Wind Speed</div>
@@ -102,9 +103,9 @@
                         <div class="line"></div>
                     </div>
                     <!-- Humidity -->
-                    <div class="highlightRow">
-                        <div class="box3Icon">
-                            <img class ="highlightIcon" src="png/humidity.png">
+                    <div class="highlight-row">
+                        <div class="highlight-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" height="40px" viewBox="0 -960 960 960" width="40px" fill="#e3e3e3"><path d="M564.63-278.46q15.4 0 26.15-10.78 10.76-10.77 10.76-26.16t-10.78-26.15q-10.77-10.76-26.16-10.76t-26.15 10.78q-10.76 10.77-10.76 26.16 0 15.4 10.78 26.15 10.77 10.76 26.16 10.76ZM378-274.67 605.33-502 582-526.1 353.9-298l24.1 23.33Zm17.4-173.02q15.39 0 26.15-10.78 10.76-10.77 10.76-26.16 0-15.4-10.78-26.15-10.77-10.76-26.16-10.76-15.4 0-26.15 10.78-10.76 10.77-10.76 26.16t10.78 26.15q10.77 10.76 26.16 10.76ZM479.86-120q-119.94 0-199.9-82.54Q200-285.07 200-408q0-86.15 69.5-190.58Q339-703 480-827.69 621-703 690.5-598.58 760-494.15 760-408q0 122.93-80.1 205.46Q599.79-120 479.86-120Z"/></svg>
                         </div>
                         <div class="title">
                             <div class="name">Humidity</div>
@@ -113,9 +114,9 @@
                         <div class="line"></div>
                     </div>
                     <!-- Temperature -->
-                    <div class="highlightRow">
-                        <div class="box3Icon">
-                            <img class ="highlightIcon" src="png/thermometer.png">
+                    <div class="highlight-row">
+                        <div class="highlight-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" height="40px" viewBox="0 -960 960 960" width="40px" fill="#e3e3e3"><path d="M484.05-558.46v-33.85h203.08v33.85H484.05Zm0-138.46v-33.85H797.9v33.85H484.05ZM318.87-160.15q-64.43 0-109.55-45.12-45.12-45.12-45.12-109.55 0-41.85 21.98-78.5 21.97-36.65 61.1-59.81v-275.28q0-30.68 20.67-51.14Q288.61-800 318.71-800q30.11 0 50.67 20.45 20.57 20.46 20.57 51.14v275.28q39.13 23.16 61.1 59.81 21.98 36.65 21.98 78.5 0 64.43-44.87 109.55-44.86 45.12-109.29 45.12ZM198.05-314.82h241.13q0-33-17.99-62.72t-50.32-50.36l-14.77-8.87v-291.64q0-15.76-10.99-26.75t-26.24-10.99q-15.76 0-26.75 10.99t-10.99 26.75v291.64l-14.26 8.87q-32.84 20.64-50.83 50.44-17.99 29.79-17.99 62.64Z"/></svg>
                         </div>
                         <div class="title">
                             <div class="name">Temperature</div>
@@ -124,9 +125,9 @@
                         <div class="line"></div>
                     </div>
                     <!-- Pressure -->
-                    <div class="highlightRow">
-                        <div class="box3Icon">
-                            <img class ="highlightIcon" src="png/pressure.png">
+                    <div class="highlight-row">
+                        <div class="highlight-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" height="40px" viewBox="0 -960 960 960" width="40px" fill="#e3e3e3"><path d="M200-452.31v-36.92h560v36.92H200Zm0-110.92v-33.85h560v33.85H200ZM462.92-120v-174.15l-88.05 87.89-24.1-24.1 129.08-128.92L608.1-230.36l-24.1 24.1-87.23-88.25V-120h-33.85Zm16.93-569.95L350.92-818.87l24.11-24.1 87.23 87.89v-174.15h33.84v174.15l88.05-87.89 24.11 24.1-128.41 128.92Z"/></svg>
                         </div>
                         <div class="title">
                             <div class="name">Pressure</div>
@@ -138,19 +139,19 @@
             </div>
 
             <!-- Cloud Image -->
-            <a class = "box4-link" href="clouds.html">
-            <div class = "box4">
+            <a class = "cloud-image-link" href="clouds.html">
+            <div class = "cloud-image-container">
                 <div class="cloud-label">Cloud Type: Altocumulus</div>
             </div>
             </a>
 
             <!-- Overview -->
-            <div class = "box5">
-                <div class="box5Title">Overview</div>
+            <div class = "overview-container">
+                <div class="overview-title">Overview</div>
                 <div class="graph"></div>
             </div>
         </div>
 
-        <script src="WeaMo-js.js"></script>
+        <script src="weamo-script.js" defer></script>
    </body>
 </html>
