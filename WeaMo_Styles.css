@@ -119,29 +119,33 @@ html, body {
   flex-direction: column;
   align-items: center;
   overflow: hidden;
-}
+  
+  .logo img {
+    width: 100%;
+    height: auto;
+  }
 
-.logoIcon {
-  width: 100%;
-  height: auto;
-}
+  .website-name {
+    font-family: 'Poppins';
+    font-size: .7vw;
+    margin-top: -15%;
+  }
 
-.website-name {
-  font-family: 'Poppins';
-  font-size: .7vw;
-  margin-top: -15%;
-}
+  .side-line {
+    margin-top: -3px;
+    margin-bottom: 5px;
+    font-size: .9vw;
+    color: var(--line-color);
+  }
 
-.side-line {
-  margin-top: -3px;
-  margin-bottom: 5px;
-  font-size: .9vw;
-  color: var(--line-color);
-}
+  /* .sideIcon {
+    width: 3.8vh;
+    height: auto;
+  } */
 
-.sideIcon {
-  width: 3.8vh;
-  height: auto;
+  .home svg{
+    fill: var(--side-icon-clicked);
+  }
 }
 
 .side-panel-container svg {
@@ -153,79 +157,75 @@ html, body {
   fill: var(--side-icon-clicked);
 }
 
-.home svg{
-  fill: var(--side-icon-clicked);
-}
-
 /* CURRENT FORECAST */
 .current-forecast-container {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   overflow: hidden;
-}
 
-.forecast-details {
-  display: flex;
-  flex: 1;
-  flex-direction: column;
-  margin-top: 2px;
-}
+  .forecast-details {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    margin-top: 2px;
+  }
 
-.top-container {
-  display: flex;
-  flex-direction: column;
-  gap: 5px;
-}
+  .top-container {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
 
-.location {
-  display: flex;
-  flex-direction: row;
-  padding: 1%;
-  width: 44%;
-  background-color: var(--accent-color);
-  font-family: 'Poppins';
-  border-radius: 30px;
-  font-size: 1vw;
-}
+  .location {
+    display: flex;
+    flex-direction: row;
+    padding: 1%;
+    width: 44%;
+    background-color: var(--accent-color);
+    font-family: 'Poppins';
+    border-radius: 30px;
+    font-size: 1vw;
+  }
 
-.location svg {
-  fill: var(--text-color);
-  width: 10%;
-  height: auto;
-}
+  .location svg {
+    fill: var(--text-color);
+    width: 10%;
+    height: auto;
+  }
 
-.date,
-#time {
-  font-family: 'Poppins';
-  font-size: .8vw;
-}
+  .date,
+  #time {
+    font-family: 'Poppins';
+    font-size: .8vw;
+  }
 
-.condition {
-  font-family: 'Poppins';
-  font-weight: 800;
-  font-size: 2.5vh;
-  margin-top: auto;
-  margin-bottom: 1%;
-}
+  .condition {
+    font-family: 'Poppins';
+    font-weight: 800;
+    font-size: 2.5vh;
+    margin-top: auto;
+    margin-bottom: 1%;
+  }
 
-.temp {
-  margin-top: -5%;
-  font-family: 'Poppins';
-  font-weight: 800;
-  font-size: 10vh;
-}
+  .temp {
+    margin-top: -5%;
+    font-family: 'Poppins';
+    font-weight: 800;
+    font-size: 10vh;
+  }
 
-.current-forecast-icon {
-  display: flex;
-  align-items: center;
-  max-width: 40%;
-  flex-shrink: 1
-}
+  .current-forecast-icon {
+    display: flex;
+    align-items: center;
+    max-width: 40%;
+    flex-shrink: 1
+  }
 
-.forecastImage {
-  max-width: 100%;
-  height: auto;
+  .forecastImage {
+    max-width: 100%;
+    height: auto;
+  }
 }
 
 /* TODAY'S FORECAST */
@@ -234,105 +234,105 @@ html, body {
   flex-direction: column;
   overflow: hidden;
   row-gap: 10%;
-}
 
-.todays-forecast-title {
-  font-family: 'Poppins';
-  font-weight: 800;
-  font-size: 2vh;
-  text-align: center;
-  padding-top: 4%;
-}
+  .todays-forecast-title {
+    font-family: 'Poppins';
+    font-weight: 800;
+    font-size: 2vh;
+    text-align: center;
+    padding-top: 4%;
+  }
 
-.details-container {
-  display: flex;
-  flex-direction: column;
-}
+  .details-container {
+    display: flex;
+    flex-direction: column;
+  }
 
-.details-container > div {
-  font-family: 'Poppins';
-  font-size: .9vw;
-  height: 11.5vh;
-}
+  .details-container > div {
+    font-family: 'Poppins';
+    font-size: .9vw;
+    height: 11.5vh;
+  }
 
-.todays-forecast {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  flex-wrap: wrap;
-}
+  .todays-forecast {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
 
-.todays-forecast > div {
-  min-width: 25%;
-  width: 27%;
-  text-align: center;
-}
+  .todays-forecast > div {
+    min-width: 25%;
+    width: 27%;
+    text-align: center;
+  }
 
-.weather-icon {
-  margin-top: -20%;
-  width: 80%;
+  .weather-icon {
+    margin-top: -20%;
+    width: 80%;
+  }
 }
 
 /* TODAY'S HIGHLIGHT */
-.box3 {
+.todays-highlight-container {
   display: flex;
   flex-direction: column;
   overflow: hidden;
-}
 
-.todays-highlight-title {
-  font-family: 'Poppins';
-  font-weight: 800;
-  font-size: 2vh;
-  margin-bottom: 1.5%;
-}
+  .todays-highlight-title {
+    font-family: 'Poppins';
+    font-weight: 800;
+    font-size: 2vh;
+    margin-bottom: 1.5%;
+  }
 
-.highlight-container {
-  display: flex;
-  flex-direction: row;
-  font-family: 'Poppins';
-  font-size: 1vw;
-  margin-left: 3%;
-}
+  .highlight-container {
+    display: flex;
+    flex-direction: row;
+    font-family: 'Poppins';
+    font-size: 1vw;
+    margin-left: 3%;
+  }
 
-.highlight-container > div {
-  width: 70%;
-}
+  .highlight-container > div {
+    width: 70%;
+  }
 
-.highlight-row {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
-  padding-left: 1%;
-  padding-right: 1%;
-}
+  .highlight-row {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding-left: 1%;
+    padding-right: 1%;
+  }
 
-.title {
-  display: flex;
-  flex-direction: column;
-  text-align: left;
-}
+  .title {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+  }
 
-.measurement {
-  font-family: 'Poppins';
-  font-weight: 800;
-}
+  .measurement {
+    font-family: 'Poppins';
+    font-weight: 800;
+  }
 
-.line {
-  height: 8vh;
-  width: 1px;
-  background-color: var(--line-color);
-}
+  .line {
+    height: 8vh;
+    width: 1px;
+    background-color: var(--line-color);
+  }
 
-.invisible {
-  visibility: hidden;
-}
+  .invisible {
+    visibility: hidden;
+  }
 
-.highlight-icon svg{
-  fill: var(--icon-color);
-  width: 3vw;
-  height: auto;
+  .highlight-icon svg{
+    fill: var(--icon-color);
+    width: 3vw;
+    height: auto;
+  }
 }
 
 /* CLOUD IMAGE */
@@ -346,14 +346,14 @@ html, body {
     linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), 
     url('altocumulus.jpg') center/cover no-repeat;
   text-decoration: none;
-}
 
-.cloud-label {
-  font-family: 'Poppins';
-  font-size: 1.3vh;
-  color: var(--text-color);
-  padding: 10px;
-  z-index: 1;
+  .cloud-label {
+    font-family: 'Poppins';
+    font-size: 1.3vh;
+    color: var(--text-color);
+    padding: 10px;
+    z-index: 1;
+  }
 }
 
 .cloud-image-link:hover {
@@ -363,16 +363,16 @@ html, body {
     url('altocumulus.jpg') center/cover no-repeat;
 }
 
-/* BOX 5 */
+/* OVERVIEW */
 .overview-container{
   padding: 2%;
-}
 
-.overview-title {
-  font-family: 'Poppins';
-  font-weight: 800;
-  font-size: 2vh;
-  margin-bottom: 1.5%;
+  .overview-title {
+    font-family: 'Poppins';
+    font-weight: 800;
+    font-size: 2vh;
+    margin-bottom: 1.5%;
+  }
 }
 
 @media only screen and (max-width: 1080px){
@@ -381,29 +381,40 @@ html, body {
   }
 
   .main-container {
-    grid-template-columns: 8% 20% 20% 35%;
-    grid-template-rows: 30% 15% 20%;
+    grid-template-columns: 5% 35% 30% 23%;
+    grid-template-rows: 25% 15% 30%;
   }
 
-  .location{
-    width: 80%;
-    font-size: 1.1vw;
+  .current-forecast-container {
+    .condition {
+      font-size: 2vh;
+    }
+    .temp {
+      font-size: 7vh;
+    }
   }
 
-  .condition {
-    font-size: 2vh;
+  .side-panel-container{
+    .sideIcon{
+      width: 3vw;
+      height: auto;
+    }
   }
 
-  .temp {
-    font-size: 9vh;
+  .todays-forecast-container {
+    .details-container > div {
+      font-size: .9vw;
+      height: 7.5vh;
+    }
   }
 
-  .details-container > div {
-    font-size: 1vw;
-    height: 9vh;
+  .todays-highlight-container{
+    .highlight-container{
+      font-size:1.1vw;
+    }
+    .line{
+      height: 4.2vw;;
+    }
   }
 
-  .line {
-    height: 5vh;
-  }
 }

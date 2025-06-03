@@ -31,7 +31,6 @@
       linear-gradient(rgba(190, 220, 192, 0.4), rgba(227, 237, 225, 0.4)), 
       url('altocumulus.jpg') center/cover no-repeat;
   }
-  
 }
 
 #switch{
@@ -115,29 +114,33 @@ body {
   flex-direction: column;
   align-items: center;
   overflow: hidden;
-}
 
-.logoIcon {
-  width: 100%;
-  height: auto;
-}
+  .logoIcon {
+    width: 100%;
+    height: auto;
+  }
 
-.website-name {
-  font-family: "Poppins";
-  font-size: .7vw;
-  margin-top: -15%;
-}
+  .website-name {
+    font-family: "Poppins";
+    font-size: .7vw;
+    margin-top: -15%;
+  }
 
-.side-line {
-  margin-top: -3px;
-  margin-bottom: 5px;
-  font-size: .9vw;
-  color: var(--line-color);
-}
+  .side-line {
+    margin-top: -3px;
+    margin-bottom: 5px;
+    font-size: .9vw;
+    color: var(--line-color);
+  }
 
-.sideIcon {
-  width: 3.8vh;
-  height: auto;
+  .sideIcon {
+    width: 3.8vh;
+    height: auto;
+  }
+
+  .clouds svg {
+    fill: var(--side-icon-clicked);
+  }
 }
 
 .side-panel-container svg {
@@ -146,10 +149,6 @@ body {
 
 .side-panel-container svg:hover {
   cursor: pointer;
-  fill: var(--side-icon-clicked);
-}
-
-.clouds svg {
   fill: var(--side-icon-clicked);
 }
 
@@ -170,7 +169,14 @@ body {
   }
 
   .main-container {
-    grid-template-columns: 8% 20% 20% 35%;
-    grid-template-rows: 30% 15% 20%;
+    grid-template-columns: 5% 35% 30% 23%;
+    grid-template-rows: 25% 15% 30%;
+  }
+
+  .side-panel-container{
+    .sideIcon{
+      width: 3vw;
+      height: auto;
+    }
   }
 }
