@@ -38,7 +38,6 @@ themeSwitch.addEventListener("click", () => {
   }
 
   const newColor = getFontColor();
-  const newBorderColor = getBorderColor();
 
   myChart.options.scales.x.ticks.color = newColor;
   myChart.options.scales.y.ticks.color = newColor;
@@ -79,7 +78,7 @@ let myChart = new Chart(graph, {
         beginAtZero: false,
         ticks: {
           font: {size: 10},
-          color: getFontColor() },
+          color: getFontColor()},
         grid: {display: false},
         title: {
           display: true,
