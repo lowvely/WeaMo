@@ -5,6 +5,7 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+  transition: all 0.3s ease;
 }
 
 :root {
@@ -372,6 +373,11 @@ html, body {
     font-weight: 800;
     font-size: 2vh;
     margin-bottom: 1.5%;
+  }
+
+  #graph {
+    width: 100%;
+    height: 100%;
   }
 }
 
