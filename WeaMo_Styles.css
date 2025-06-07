@@ -45,7 +45,6 @@
   width: 3.1vw;
   padding: 0;
   border-radius: 50%;
-  background-color: var(--main-bg-color);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -53,7 +52,7 @@
 }
 
 #switch svg{
-  fill:var(--side-icon-color);
+  fill:#FDB201;
   width: 50%;
   height: auto;
 }
@@ -139,10 +138,10 @@ html, body {
     color: var(--line-color);
   }
 
-  /* .sideIcon {
+  .sideIcon {
     width: 3.8vh;
     height: auto;
-  } */
+  }
 
   .home svg{
     fill: var(--side-icon-clicked);

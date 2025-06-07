@@ -9,8 +9,8 @@ let lightmode = localStorage.getItem('lightmode')
 const themeSwitch = document.getElementById('switch')
 
 const fontColors = {
-  light: '#000000', // black font for light mode
-  dark: '#FFFFFF'   // white font for dark mode
+  light: '#000000',
+  dark: '#FFFFFF'
 };
 
 function getFontColor() {
@@ -89,5 +89,4 @@ let myChart = new Chart(graph, {
       }
     }
   }
-
 });
