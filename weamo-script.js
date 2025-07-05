@@ -90,3 +90,46 @@ let myChart = new Chart(graph, {
     }
   }
 });
+
+//Fetching Real-time Data from Google Sheet
+async function updateWeatherFromSheet() {
+  const url = "https://script.google.com/macros/s/AKfycbxDgdVsFjB6kxWl9BltMlomz5HDqxWzbf4qQcuKhS3aLBHoNFmsJ-4WbTbaFiLCsrAv/exec";
+
+  try {
+    const response = await fetch(url);
+    const data = await response.json();
+
+    // Sample: data = { windSpeed: "10 km/h", humidity: "85%", pressure: "1010 mbar", temperature: "28°", condition: "Sunny" }
+
+    // Update DOM elements
+     document.querySelector(".highlight-row:nth-child(1) .measurement").textContent = `${data["Wind"]} km/s`;
+    document.querySelector(".highlight-row:nth-child(2) .measurement").textContent = `${data["Humidity"]}%`;
+    document.querySelector(".highlight-row:nth-child(3) .measurement").textContent = `${data["Temperature"]}°`;
+    document.querySelector(".highlight-row:nth-child(4) .measurement").textContent = `${data["Pressure"]} mbar`;
+    document.querySelector(".cloud-label").textContent = `Cloud Type: ${data["CloudType"]}`;
+
+    document.querySelector(".condition").textContent = data["WeatherCondition"];
+    document.querySelector(".temp").textContent = `${data["Temperature"]}°`;
+
+    // Optional: Change forecast image based on condition
+    const forecastImage = document.querySelector('.forecastImage');
+    const condition = data.WeatherCondition.toLowerCase();
+
+    if (condition.includes("sunny")) {
+      forecastImage.src = "png/Sunny.png";
+    } else if (condition.includes("rainy")) {
+      forecastImage.src = "png/rainyIcon.png";
+    } else {
+      forecastImage.src = "png/forecastIcon.png"; // default
+    }
+
+  } catch (error) {
+    console.error("Failed to fetch weather data:", error);
+  }
+}
+
+// Initial load
+updateWeatherFromSheet();
+
+// Auto-refresh every 10 seconds
+setInterval(updateWeatherFromSheet, 3000);

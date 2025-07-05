@@ -398,7 +398,8 @@ html, body {
 
   .main-container {
     grid-template-columns: 5% 35% 30% 23%;
-    grid-template-rows: 25% 15% 30%;
+    grid-template-rows: 40% auto 35%;
+    height: 55%;
   }
 
   .current-forecast-container {
@@ -420,7 +421,7 @@ html, body {
   .todays-forecast-container {
     .details-container > div {
       font-size: .9vw;
-      height: 7.5vh;
+      height: 6.5vh;
     }
   }
 
