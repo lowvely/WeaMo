@@ -252,6 +252,7 @@ html, body {
     font-size: .9vw;
     height: 12vh;
     align-items: center;
+    margin-bottom: 3vh;
   }
 
   .todays-forecast1,
