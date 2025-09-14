@@ -157,4 +157,22 @@ html, body {
 
 .aboutUs-details{
     font-family: 'Poppins';
+    overflow: hidden;
+}
+
+@media only screen and (max-width: 1080px){
+  * {
+    transition: all 0.3s ease;
+  }
+
+  .main-container {
+    grid-template-columns: 5% 35% 30% 23%;
+    grid-template-rows: 40% auto 35%;
+    height: 55%;
+  }
+
+  .aboutUs-details {
+    font-size: 1.2vh;
+  }
+
 }

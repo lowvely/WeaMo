@@ -170,7 +170,17 @@ body {
 
   .main-container {
     grid-template-columns: 5% 35% 30% 23%;
-    grid-template-rows: 25% 15% 30%;
+    grid-template-rows: 40% auto 35%;
+    height: 55%;
+  }
+
+  .current-forecast-container {
+    .condition {
+      font-size: 2vh;
+    }
+    .temp {
+      font-size: 7vh;
+    }
   }
 
   .side-panel-container{
@@ -179,4 +189,21 @@ body {
       height: auto;
     }
   }
+
+  .todays-forecast-container {
+    .details-container > div {
+      font-size: .9vw;
+      height: 6.5vh;
+    }
+  }
+
+  .todays-highlight-container{
+    .highlight-container{
+      font-size:1.1vw;
+    }
+    .line{
+      height: 4.2vw;;
+    }
+  }
+
 }
