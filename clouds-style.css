@@ -119,7 +119,8 @@ body {
     height: auto;
   }
 
-  .website-name {
+  .website-name,
+  .about {
     font-family: "Poppins";
     font-size: .7vw;
     margin-top: -15%;

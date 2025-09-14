@@ -1,0 +1,160 @@
+/* Global Reset */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  transition: all 0.3s ease;
+}
+
+:root {
+  --text-color: white;
+  --main-bg-color: #060C1A;
+  --container-color: #121A2C;
+  --icon-color: white;
+  --accent-color: orange;
+  --side-icon-color: #8E8888;
+  --side-icon-clicked: white;
+  --line-color: #192540;
+}
+
+/* THEME SWITCH */
+.lightmode {
+  --text-color: #1E1E1E;
+  --container-color: #F5F3D1;
+  --icon-color: #1E1E1E;
+  --accent-color: #FDD47A;
+  --main-bg-color: #D5D5D5;
+  --side-icon-color: #8E8888;
+  --side-icon-clicked: #463C33;
+  --line-color: white;
+  background: linear-gradient(to bottom, #FFD7B9, #D5E2B5);
+
+  .cloud-image-link{
+    background: 
+      linear-gradient(rgba(190, 220, 192, 0.4), rgba(227, 237, 225, 0.4)), 
+      url('altocumulus.jpg') center/cover no-repeat;
+  }
+  
+}
+
+#switch{
+  all: unset;
+  height: 3.1vw;
+  width: 3.1vw;
+  padding: 0;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+#switch svg{
+  fill:#FDB201;
+  width: 50%;
+  height: auto;
+}
+
+#switch svg:last-child{
+  display: none;
+}
+.lightmode #switch svg:first-child{
+  display: none;
+}
+.lightmode #switch svg:last-child{
+  display: block;
+}
+
+/* FONT */
+@font-face {
+  font-family: 'Poppins';
+  src: url('Poppins-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+}
+
+html, body {
+  background-color: var(--main-bg-color);
+  height: 100%;
+  width: 100%;
+}
+
+.main-container {
+  position: relative;
+  display: grid;
+  grid-template-areas:
+      "side-panel-container aboutUs-details aboutUs-details aboutUs-details"
+      "side-panel-container aboutUs-details aboutUs-details aboutUs-details"
+      "side-panel-container aboutUs-details aboutUs-details aboutUs-details";
+  grid-template-columns: 5% 35% 30% 23%;
+  grid-template-rows: 40% 20% 30%;
+  row-gap: 2%;
+  column-gap: 1%;
+  top: 7.5%;
+  left: 3%;
+  width: 94%;
+  height: 90%;
+  justify-content: center;
+}
+
+.main-container > div {
+  background-color: var(--container-color);
+  padding: 2%;
+  border-radius: 20px;
+  color: var(--text-color);
+}
+
+.main-container > .side-panel-container { grid-area: side-panel-container; }
+.main-container > .aboutUs-details { grid-area: aboutUs-details; }
+
+
+/* SIDE PANEL */
+.side-panel-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow: hidden;
+  
+  .logo img {
+    width: 100%;
+    height: auto;
+  }
+
+  .website-name, 
+  .about {
+    font-family: 'Poppins';
+    font-size: .7vw;
+    margin-top: -15%;
+  }
+
+  .side-line {
+    margin-top: -3px;
+    margin-bottom: 5px;
+    font-size: .9vw;
+    color: var(--line-color);
+  }
+
+  .sideIcon {
+    width: 3.8vh;
+    height: auto;
+  }
+
+  .home svg{
+    fill: var(--side-icon-clicked);
+  }
+}
+
+.side-panel-container svg {
+  fill: var(--side-icon-color);
+}
+
+.side-panel-container svg:hover {
+  cursor: pointer;
+  fill: var(--side-icon-clicked);
+}
+
+.aboutUs-details{
+    font-family: 'Poppins';
+}
