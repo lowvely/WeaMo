@@ -31,12 +31,17 @@
   --line-color: white;
   background: linear-gradient(to bottom, #FFD7B9, #D5E2B5);
 
-  .cloud-image-link{
+  .cloud-image-container{
     background: 
       linear-gradient(rgba(190, 220, 192, 0.4), rgba(227, 237, 225, 0.4)), 
       url('altocumulus.jpg') center/cover no-repeat;
   }
   
+  .cloud-details-container{
+    background: 
+      linear-gradient(rgba(159, 155, 155, 0.4), rgba(66, 67, 66, 0.4)), 
+      url('altocumulus.jpg') center/cover no-repeat;
+  }
 }
 
 #switch{
@@ -143,18 +148,28 @@ html, body {
     width: 3.8vh;
     height: auto;
   }
-
-  .home svg{
-    fill: var(--side-icon-clicked);
-  }
 }
 
 .side-panel-container svg {
   fill: var(--side-icon-color);
+  transition: fill 0.3s ease;
 }
 
 .side-panel-container svg:hover {
   cursor: pointer;
+  fill: var(--side-icon-clicked);
+}
+
+/* Active state → icon turns white */
+.side-panel-container > div.active .sideIcon {
+  fill: var(--side-icon-clicked);
+}
+
+/* ✅ Make home active by default */
+.home-container {
+  fill: var(--side-icon-clicked);
+}
+.home-container.active .sideIcon {
   fill: var(--side-icon-clicked);
 }
 
@@ -349,7 +364,7 @@ html, body {
 }
 
 /* CLOUD IMAGE */
-.cloud-image-link {
+.cloud-image-container {
   border-radius: 20px;
   position: relative;
   align-items: flex-end;
@@ -359,22 +374,34 @@ html, body {
     linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), 
     url('altocumulus.jpg') center/cover no-repeat;
   text-decoration: none;
+  
+}
 
-  .cloud-label {
+.cloud-label {
     font-family: 'Poppins';
     font-size: 1.3vh;
     color: var(--text-color);
     padding: 10px;
     z-index: 1;
   }
-}
 
-.cloud-image-link:hover {
+.cloud-image-container:hover {
   cursor: pointer;
   background: 
     linear-gradient(rgba(78, 81, 84, 0.4), rgba(78, 81, 84, 0.4)), 
     url('altocumulus.jpg') center/cover no-repeat;
 }
+
+.cloud-details-container {
+  width: 257%;     
+  height: 235%;   
+  border-radius: 12px;
+  padding: 20px;
+  background: 
+    linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), 
+    url('altocumulus.jpg') center/cover no-repeat;
+}
+
 
 /* OVERVIEW */
 .overview-container{
@@ -392,6 +419,11 @@ html, body {
     height: 100%;
   }
 }
+
+.hidden {
+  display: none;
+}
+
 
 @media only screen and (max-width: 1080px){
   * {
@@ -436,4 +468,7 @@ html, body {
     }
   }
 
+  .cloud-details-container {
+  height: 249%;   
+  }
 }

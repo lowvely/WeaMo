@@ -18,8 +18,17 @@ const fontColors = {
   dark: '#FFFFFF'
 };
 
+const gridColors = {
+  light: '#edd6abff',
+  dark: '#4c2802ff'
+};
+
 function getFontColor() {
   return document.body.classList.contains('lightmode') ? fontColors.light : fontColors.dark;
+}
+
+function getGridColor() {
+  return document.body.classList.contains('lightmode') ? gridColors.light : gridColors.dark;
 }
 
 const enableLightmode = () => {
@@ -43,10 +52,15 @@ themeSwitch.addEventListener("click", () => {
   }
 
   const newColor = getFontColor();
+  const newGrid = getGridColor();
+
 
   myChart.options.scales.x.ticks.color = newColor;
+  myChart.options.scales.x.border.color = newGrid;
   myChart.options.scales.y.ticks.color = newColor;
   myChart.options.scales.y.title.color = newColor;
+  myChart.options.scales.y.border.color = newGrid;
+  
 
   myChart.update();
 });
@@ -57,7 +71,7 @@ const graph = document.getElementById('graph');
 let myChart = new Chart(graph, {
   type: 'line',
   data: {
-    labels: [], // initially empty
+    labels: [],
     datasets: [{
       data: [],
       borderColor: 'orange',
@@ -73,6 +87,9 @@ let myChart = new Chart(graph, {
     scales: {
       x: {
         grid: { display: false },
+        border:{
+          color: getGridColor()
+        },
         ticks: {
           font: { size: 10 },
           color: getFontColor()
@@ -86,6 +103,9 @@ let myChart = new Chart(graph, {
           color: getFontColor()
         },
         grid: { display: false },
+        border:{
+          color: getGridColor()
+        },
         title: {
           display: true,
           text: 'Temperature (°C)',
@@ -195,3 +215,55 @@ function fetchForecastData() {
 
 fetchForecastData();
 setInterval(fetchForecastData, 10000); // every 10 seconds
+
+// ICON + CLOUD-IMAGE TRIGGERS
+document.addEventListener("DOMContentLoaded", () => {
+  const cloudIcon = document.querySelector(".clouds-container");
+  const cloudImage = document.querySelector(".cloud-image-container");
+  const homeIcon = document.querySelector(".home-container");
+
+  const sections = document.querySelectorAll(
+    ".current-forecast-container, .todays-forecast-container, .todays-highlight-container, .cloud-image-container, .overview-container"
+  );
+  const cloudDetails = document.querySelector(".cloud-details-container");
+  const cloudLabel = document.querySelector(".cloud-label");
+
+  const sideIcons = [homeIcon, cloudIcon]; // only actual side icons here
+
+  // helper: switch active state
+  function setActive(icon) {
+    sideIcons.forEach(el => el.classList.remove("active"));
+    icon.classList.add("active");
+  }
+
+  // default = home
+  setActive(homeIcon);
+
+  // clicking home
+  homeIcon.addEventListener("click", () => {
+    sections.forEach(el => el.classList.remove("hidden"));
+    cloudDetails.classList.add("hidden");
+    document.querySelector(".cloud-image-container").appendChild(cloudLabel);
+    setActive(homeIcon);
+  });
+
+  // clicking cloud icon
+  cloudIcon.addEventListener("click", () => {
+    sections.forEach(el => el.classList.add("hidden"));
+    cloudDetails.classList.remove("hidden");
+    cloudDetails.appendChild(cloudLabel);
+    setActive(cloudIcon);
+  });
+
+  // clicking cloud image (acts same as cloud icon)
+  cloudImage.addEventListener("click", () => {
+    sections.forEach(el => el.classList.add("hidden"));
+    cloudDetails.classList.remove("hidden");
+    cloudDetails.appendChild(cloudLabel);
+    setActive(cloudIcon); // make the side cloud icon white
+  });
+});
+
+
+
+
