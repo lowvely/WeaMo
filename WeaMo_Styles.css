@@ -9,27 +9,45 @@
 }
 
 :root {
+  --title-color: #FF9E5E;
   --text-color: white;
-  --main-bg-color: #060C1A;
   --container-color: #121A2C;
   --icon-color: white;
-  --accent-color: orange;
-  --side-icon-color: #8E8888;
+  --accent-color: #DB8B06;
   --side-icon-clicked: white;
-  --line-color: #192540;
+  --border-color: 1px solid rgba(171, 163, 196, 0.15);
+  --box-shadow-color: 0 10px 40px rgba(15, 3, 52, 0.4);
+  --font-weight-loc: 300;
+  --highlight-bg: rgba(255, 158, 94, 0.15);
+  --windspeed-color: #FF9E5E;
+  --hum-color: #FF9E5E;
+  --temp-color: #FF9E5E;
+  --pres-color: #FF9E5E;
+
+  background: #060C1A;
 }
 
 /* THEME SWITCH */
 .lightmode {
-  --text-color: #1E1E1E;
-  --container-color: #F5F3D1;
-  --icon-color: #1E1E1E;
+  --title-color:#2D6A4F;
+  --light-text-color:#113065;
+  /* --light-text-color: #567C8D; */
+  /* --text-color: #2F4156; */
+  --text-color: #000035;
+  --container-color: rgba(255, 255, 255, 0.5);
+  --icon-color: #94A3B8;
   --accent-color: #FDD47A;
-  --main-bg-color: #D5D5D5;
-  --side-icon-color: #8E8888;
-  --side-icon-clicked: #463C33;
-  --line-color: white;
-  background: linear-gradient(to bottom, #FFD7B9, #D5E2B5);
+  --side-icon-clicked: #FFFFFF;
+  --border-color: 1px solid rgba(255, 255, 255, 0.3);
+  --box-shadow-color: 0 8px 32px 0 rgba(31, 38, 135, 0.07);;
+  --font-weight-loc: 500;
+  --highlight-bg:#F1F5F9;
+  --windspeed-color: #066339;
+  --hum-color: #138EFF;
+  --temp-color: #F97316;
+  --pres-color: #A855F7;
+  
+  background: linear-gradient(180deg, #E7F5E8 0%, #FEF3C7 100%);
 
   .cloud-image-container{
     background: 
@@ -38,8 +56,7 @@
   }
   
   .cloud-details-container{
-    background: 
-      linear-gradient(rgba(159, 155, 155, 0.4), rgba(66, 67, 66, 0.4)), 
+    background:  
       url('altocumulus.jpg') center/cover no-repeat;
   }
 }
@@ -54,10 +71,11 @@
   justify-content: center;
   align-items: center;
   cursor: pointer;
+  padding-top: 870%;
 }
 
 #switch svg{
-  fill:#FDB201;
+  fill: var(--accent-color);
   width: 50%;
   height: auto;
 }
@@ -73,6 +91,13 @@
 }
 
 /* FONT */
+@font-face {
+  font-family: 'Inter';
+  src: url('Inter-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+}
+
 @font-face {
   font-family: 'Poppins';
   src: url('Poppins-Regular.ttf') format('truetype');
@@ -106,6 +131,10 @@ html, body {
 
 .main-container > div {
   background-color: var(--container-color);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: var(--border-color);
+  box-shadow: var(--box-shadow-color);
   padding: 2%;
   border-radius: 20px;
   color: var(--text-color);
@@ -130,38 +159,49 @@ html, body {
     height: auto;
   }
 
-  .website-name, 
-  .about {
-    font-family: 'Poppins';
-    font-size: .7vw;
+  .website-name {
+    font-family: 'Inter';
+    color: var(--title-color);
+    font-weight:700;
+    font-size: .65vw;
     margin-top: -15%;
   }
 
-  .side-line {
-    margin-top: -3px;
-    margin-bottom: 5px;
-    font-size: .9vw;
-    color: var(--line-color);
+  .about-us{
+    font-family: 'Inter';
+    font-size: .5vw;
   }
 
   .sideIcon {
-    width: 3.8vh;
+    width: 2.5vh;
     height: auto;
+    fill: var(--icon-color);
   }
+
+  .clouds-container, .home-container, .theme-switch, .about-us-container{
+    margin: 20%;
+  }
+
 }
 
-.side-panel-container svg {
-  fill: var(--side-icon-color);
-  transition: fill 0.3s ease;
-}
-
-.side-panel-container svg:hover {
+.side-panel-container svg:hover, .about-us-container svg:hover {
   cursor: pointer;
   fill: var(--side-icon-clicked);
 }
 
 /* Active state → icon turns white */
-.side-panel-container > div.active .sideIcon {
+.side-panel-container > div.active{
+  padding-top: 15%;
+  padding-left: 15%;
+  padding-right: 15%;
+  padding-bottom: 9%;
+  background-color: var(--accent-color);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 10px 25px -5px rgba(255, 140, 66, 0.4);
+  border-radius: 35%;
+}
+
+.side-panel-container >div.active .sideIcon{
   fill: var(--side-icon-clicked);
 }
 
@@ -169,9 +209,40 @@ html, body {
 .home-container {
   fill: var(--side-icon-clicked);
 }
+
 .home-container.active .sideIcon {
   fill: var(--side-icon-clicked);
 }
+
+/* Active state → icon turns white */
+.about-us-container > div.active{
+  padding-top: 15%;
+  padding-left: 15%;
+  padding-right: 15%;
+  padding-bottom: 9%;
+  background-color: var(--accent-color);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 10px 25px -5px rgba(255, 140, 66, 0.4);
+  border-radius: 35%;
+}
+
+.about-us-container >div.active .sideIcon{
+  fill: var(--side-icon-clicked);
+}
+
+.about-container {
+  width: 257%;     
+  height: 235%;   
+  border-radius: 12px;
+  padding: 20px;
+  font-family: 'Inter';
+  font-size: 1.1vw;
+}
+
+.aboutUsIcon{
+  color: var(--icon-color);
+}
+
 
 /* CURRENT FORECAST */
 .current-forecast-container {
@@ -194,30 +265,46 @@ html, body {
   }
 
   .location {
-    display: flex;
-    flex-direction: row;
-    padding: 1%;
+    display: inline-flex;
+    align-items: center;
+    padding: 8px 10px;
     width: 44%;
     background-color: var(--accent-color);
-    font-family: 'Poppins';
-    border-radius: 30px;
+    color: var(--text-color);
+    /* box-shadow: var(--box-shadow-color); */
+    /* border: var(--border-color); */
+    font-family: 'Inter';
+    border-radius: 50px;
     font-size: 1vw;
+    font-weight: 500;
+    letter-spacing: .5px;
   }
 
-  .location svg {
+  .location-icon {
+    display: flex;
+    align-items: center;
     fill: var(--text-color);
     width: 10%;
     height: auto;
   }
 
-  .date,
-  #time {
-    font-family: 'Poppins';
+  .date {
+    margin-top: 7px;
+    font-family: 'Inter';
     font-size: .8vw;
+    letter-spacing: -0.5px;
+    font-weight: 400;
+  }
+
+  #time{
+    font-family: 'Inter';
+    font-size: .6vw;
+    color: var(--light-text-color);
   }
 
   .condition {
     font-family: 'Poppins';
+    color: var(--text-color);
     font-weight: 800;
     font-size: 2.5vh;
     margin-top: auto;
@@ -226,9 +313,11 @@ html, body {
 
   .temp {
     margin-top: -5%;
+    color: var(--text-color);
     font-family: 'Poppins';
     font-weight: 800;
     font-size: 10vh;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
   }
 
   .current-forecast-icon {
@@ -251,9 +340,9 @@ html, body {
   overflow: hidden;
 
   .todays-forecast-title {
-    font-family: 'Poppins';
+    font-family: 'Inter';
     font-weight: 800;
-    font-size: 2vh;
+    font-size: 1.9vh;
     text-align: center;
     padding: 4%;
   }
@@ -264,7 +353,7 @@ html, body {
   }
 
   .details-container > div {
-    font-family: 'Poppins';
+    font-family: 'Inter';
     font-size: .9vw;
     height: 12vh;
     align-items: center;
@@ -292,7 +381,11 @@ html, body {
 
   .todays-forecast3 {
     background: var(--accent-color);
+    color: var(--text-color);
+    font-weight: 400;
     border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 10px 25px -5px rgba(255, 140, 66, 0.4);
   }
 
   .weather-icon {
@@ -308,17 +401,16 @@ html, body {
   overflow: hidden;
 
   .todays-highlight-title {
-    font-family: 'Poppins';
+    font-family: 'Inter';
     font-weight: 800;
     font-size: 2vh;
-    margin-bottom: 1.5%;
+    margin-bottom: 2.5%;
   }
 
   .highlight-container {
     display: flex;
     flex-direction: row;
-    font-family: 'Poppins';
-    font-size: 1vw;
+    font-family: 'Inter';
     margin-left: 3%;
   }
 
@@ -341,25 +433,41 @@ html, body {
     text-align: left;
   }
 
+  .name {
+    color: var(--light-text-color);
+    font-size: .9vw;
+  }
+
   .measurement {
-    font-family: 'Poppins';
+    font-family: 'Inter';
     font-weight: 800;
-  }
-
-  .line {
-    height: 8vh;
-    width: 1px;
-    background-color: var(--line-color);
-  }
-
-  .invisible {
-    visibility: hidden;
+    color: var(--text-color);
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+    font-size: 1.2vw;
   }
 
   .highlight-icon svg{
-    fill: var(--icon-color);
+    background-color: var(--highlight-bg);
+    border-radius: 14px;
     width: 3vw;
+    padding: 10%;
     height: auto;
+  }
+
+  .ws-icon{
+    fill: var(--windspeed-color);
+  }
+
+  .hum-icon{
+    fill: var(--hum-color);
+  }
+
+  .temp-icon{
+    fill: var(--temp-color);
+  }
+
+  .pres-icon{
+    fill: var(--pres-color);
   }
 }
 
@@ -374,13 +482,12 @@ html, body {
     linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), 
     url('altocumulus.jpg') center/cover no-repeat;
   text-decoration: none;
-  
 }
 
 .cloud-label {
-    font-family: 'Poppins';
-    font-size: 1.3vh;
-    color: var(--text-color);
+    font-family: 'Inter';
+    font-size: 1.5vh;
+    color: white;
     padding: 10px;
     z-index: 1;
   }
@@ -408,7 +515,7 @@ html, body {
   padding: 2%;
 
   .overview-title {
-    font-family: 'Poppins';
+    font-family: 'Inter';
     font-weight: 800;
     font-size: 2vh;
     margin-bottom: 1.5%;

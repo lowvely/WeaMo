@@ -221,6 +221,8 @@ document.addEventListener("DOMContentLoaded", () => {
   const cloudIcon = document.querySelector(".clouds-container");
   const cloudImage = document.querySelector(".cloud-image-container");
   const homeIcon = document.querySelector(".home-container");
+  const aboutIcon = document.querySelector(".about-us-container");
+  const aboutContainer = document.querySelector(".about-container");
 
   const sections = document.querySelectorAll(
     ".current-forecast-container, .todays-forecast-container, .todays-highlight-container, .cloud-image-container, .overview-container"
@@ -228,7 +230,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const cloudDetails = document.querySelector(".cloud-details-container");
   const cloudLabel = document.querySelector(".cloud-label");
 
-  const sideIcons = [homeIcon, cloudIcon]; // only actual side icons here
+  const sideIcons = [homeIcon, cloudIcon, aboutIcon];
 
   // helper: switch active state
   function setActive(icon) {
@@ -243,6 +245,7 @@ document.addEventListener("DOMContentLoaded", () => {
   homeIcon.addEventListener("click", () => {
     sections.forEach(el => el.classList.remove("hidden"));
     cloudDetails.classList.add("hidden");
+    aboutContainer.classList.add("hidden");
     document.querySelector(".cloud-image-container").appendChild(cloudLabel);
     setActive(homeIcon);
   });
@@ -250,6 +253,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // clicking cloud icon
   cloudIcon.addEventListener("click", () => {
     sections.forEach(el => el.classList.add("hidden"));
+    aboutContainer.classList.add("hidden");
     cloudDetails.classList.remove("hidden");
     cloudDetails.appendChild(cloudLabel);
     setActive(cloudIcon);
@@ -258,12 +262,18 @@ document.addEventListener("DOMContentLoaded", () => {
   // clicking cloud image (acts same as cloud icon)
   cloudImage.addEventListener("click", () => {
     sections.forEach(el => el.classList.add("hidden"));
+    aboutContainer.classList.add("hidden");
     cloudDetails.classList.remove("hidden");
     cloudDetails.appendChild(cloudLabel);
     setActive(cloudIcon); // make the side cloud icon white
   });
+
+  // clicking about us
+  aboutIcon.addEventListener("click", () => {
+    sections.forEach(el => el.classList.add("hidden")); // hide main sections
+    cloudDetails.classList.add("hidden");
+    aboutContainer.classList.remove("hidden"); // show about section
+    setActive(aboutIcon);
+  });
+
 });
-
-
-
-
