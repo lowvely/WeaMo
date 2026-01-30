@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+    <script type="module" src="weamo-script.js"></script>
     <head>
         <title>WeaMo</title>
         <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -109,7 +110,7 @@
                         </div>
                         <div class="title">
                             <div class="name">Wind Speed</div>
-                            <div class="measurement">Loding...</div>
+                            <div class="measurement" id="windSpeed">Loding...</div>
                         </div>
                         <div class="line"></div>
                     </div>
@@ -120,7 +121,7 @@
                         </div>
                         <div class="title">
                             <div class="name">Humidity</div>
-                            <div class="measurement">Loading...</div>
+                            <div class="measurement" id="humidity">Loading...</div>
                         </div>
                         <div class="line"></div>
                     </div>
@@ -131,7 +132,7 @@
                         </div>
                         <div class="title">
                             <div class="name">Temperature</div>
-                            <div class="measurement">Loading...</div>
+                            <div class="measurement" id="temperature">Loading...</div>
                         </div>
                         <div class="line"></div>
                     </div>
@@ -142,7 +143,7 @@
                         </div>
                         <div class="title">
                             <div class="name">Pressure</div>
-                            <div class="measurement">Loading...</div>
+                            <div class="measurement" id="pressure">Loading...</div>
                         </div>
                         <div class="line invisible"></div>
                     </div>
@@ -187,6 +188,6 @@
 
         </div>
 
-        <script src="weamo-script.js" defer></script>
+        
    </body>
 </html>

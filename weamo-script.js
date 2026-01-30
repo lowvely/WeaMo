@@ -65,7 +65,22 @@ themeSwitch.addEventListener("click", () => {
   myChart.update();
 });
 
-// GRAPH
+// // Helper to format time
+// function formatTime(rawTime) {
+//   const date = new Date(rawTime);
+//   if (isNaN(date)) return rawTime;
+//   return date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+// }
+
+// SUPABASE SETUP
+import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm";
+
+const supabase = createClient(
+  "https://ixofcczytuiaulkqtuks.supabase.co",
+  "sb_publishable_RKTJjRPrvJym2wq6ptrvOA_lPG8OiFS"
+);
+
+// Graph Setup
 const graph = document.getElementById('graph');
 
 let myChart = new Chart(graph, {
@@ -87,25 +102,15 @@ let myChart = new Chart(graph, {
     scales: {
       x: {
         grid: { display: false },
-        border:{
-          color: getGridColor()
-        },
-        ticks: {
-          font: { size: 10 },
-          color: getFontColor()
-        },
-        title: { display: true }
+        border:{color: getGridColor()},
+        ticks: { font: { size: 10 }, color: getFontColor() },
+        title: {display: true}
       },
       y: {
         beginAtZero: false,
-        ticks: {
-          font: { size: 10 },
-          color: getFontColor()
-        },
-        grid: { display: false },
-        border:{
-          color: getGridColor()
-        },
+        ticks: { font: { size: 10 }, color: getFontColor() },
+        grid: {display: false},
+        border: {color: getGridColor()},
         title: {
           display: true,
           text: 'Temperature (°C)',
@@ -117,104 +122,113 @@ let myChart = new Chart(graph, {
   }
 });
 
-// ➕ Helper to format time (if needed)
-function formatTime(rawTime) {
-  const date = new Date(rawTime);
-  if (isNaN(date)) return rawTime;
-  return date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-}
-
-// Fetching Real-time Data from Google Sheet
-async function updateWeatherFromSheet() {
-  const url = "https://script.google.com/macros/s/AKfycbxDgdVsFjB6kxWl9BltMlomz5HDqxWzbf4qQcuKhS3aLBHoNFmsJ-4WbTbaFiLCsrAv/exec";
-
+// Fetch Laters Weather + update chart
+async function updateWeatherFromSupabase() {
   try {
-    const response = await fetch(url);
-    const data = await response.json();
+    // Latest data for highlights
+    const { data: latestData, error: latestError } = await supabase
+      .from("weather_data")
+      .select("*")
+      .order("created_at", { ascending: false })
+      .limit(1)
+      .single();
 
-    // Update DOM elements
-    document.querySelector(".highlight-row:nth-child(1) .measurement").textContent = `${data["Wind"]} km/s`;
-    document.querySelector(".highlight-row:nth-child(2) .measurement").textContent = `${data["Humidity"]}%`;
-    document.querySelector(".highlight-row:nth-child(3) .measurement").textContent = `${data["Temperature"]}°`;
-    document.querySelector(".highlight-row:nth-child(4) .measurement").textContent = `${data["Pressure"]} mbar`;
-    document.querySelector(".cloud-label").textContent = `Cloud Type: ${data["CloudType"]}`;
-    document.querySelector(".condition").textContent = data["WeatherCondition"];
-    document.querySelector(".temp").textContent = `${data["Temperature"]}°`;
+    if (latestError) {
+      console.error("Supabase error (latest):", latestError);
+    } else if (latestData) {
+      document.getElementById("windSpeed").textContent = `${latestData.wind_speed} km/h`;
+      document.getElementById("humidity").textContent = `${latestData.humidity}%`;
+      document.getElementById("temperature").textContent = `${latestData.temperature}°`;
+      document.getElementById("pressure").textContent = `${latestData.pressure} hPa`;
 
-    const forecastImage = document.querySelector('.forecastImage');
-    const condition = data.WeatherCondition.toLowerCase();
-    if (condition.includes("sunny")) {
-      forecastImage.src = "png/Sunny.png";
-    } else if (condition.includes("rainy")) {
-      forecastImage.src = "png/rainyIcon.png";
-    } else {
-      forecastImage.src = "png/forecastIcon.png";
+      const tempDisplay = document.querySelector(".temp");
+      const conditionDisplay = document.querySelector(".condition");
+      const cloudLabel = document.querySelector(".cloud-label");
+      const forecastImage = document.querySelector(".forecastImage");
+
+      if (tempDisplay) tempDisplay.textContent = `${latestData.temperature}°`;
+      if (conditionDisplay) conditionDisplay.textContent = latestData.condition;
+      if (cloudLabel) cloudLabel.textContent = `Cloud Type: ${latestData.cloud_type}`;
+
+       //Weather Icon Logic
+      if (forecastImage) {
+        const condition = latestData.condition.toLowerCase();
+        if (condition.includes("sunny") || condition.includes("clear")) {
+          forecastImage.src = "png/Sunny.png";
+        } else if (condition.includes("cloud") || condition.includes("outcast")) {
+          forecastImage.src = "png/Cloudy.png";
+        } else if (condition.includes("rainy") || condition.includes("shower") || condition.includes("storm")) {
+          forecastImage.src = "png/rainyIcon.png";
+        } else {
+          forecastImage.src = "png/forecastIcon.png"; // default icon
+        }
+      }
     }
 
-    // ➕ Update Graph using data.allRows
-    if (data.allRows && Array.isArray(data.allRows)) {
-      const labels = [];
-      const temps = [];
+    // All data for chart
+    const { data: allData, error: allError } = await supabase
+      .from("weather_data")
+      .select("temperature, created_at")
+      .order("created_at", { ascending: true });
 
-      data.allRows.forEach(row => {
-        if (row.time && row.temperature) {
-          labels.push(row.time);
-          temps.push(parseFloat(row.temperature));
-        }
+    if (allError) {
+      console.error("Supabase error (graph):", allError);
+    } else if (allData) {
+      const labels = allData.map(row => {
+        const date = new Date(row.created_at);
+        return `${date.getHours()}:${String(date.getMinutes()).padStart(2, "0")}`;
       });
+      const temps = allData.map(row => parseFloat(row.temperature));
 
       myChart.data.labels = labels;
       myChart.data.datasets[0].data = temps;
       myChart.update();
     }
 
-  } catch (error) {
-    console.error("Failed to fetch weather data:", error);
+  } catch (err) {
+    console.error("Unexpected error:", err);
   }
 }
 
-// Initial load
-updateWeatherFromSheet();
-setInterval(updateWeatherFromSheet, 3000); // every 3 seconds
+updateWeatherFromSupabase();
+setInterval(updateWeatherFromSupabase, 3000); // refresh every 3 seconds
 
-// Forecast Container (4 tiles)
-const forecastApiUrl = 'https://script.google.com/macros/s/AKfycbwKEx_HBmL3zcPiokfkuY0I049bwFdCEFHmX7nP6BZww3zlT-wpgh5z3V1KxD_x81nr/exec';
+// Today's Forecats -FETCH LAST 3 FORECASTS-
+async function updateTodaysForecast() {
+  try {
+    const { data, error } = await supabase
+      .from("weather_forecast")
+      .select("*")
+      .order("created_at")
+      .limit(3);
 
-function fetchForecastData() {
-  fetch(forecastApiUrl)
-    .then(response => response.json())
-    .then(data => {
-      const forecastArray = data.Forecast;
+    if (error) return console.error("Supabase error:", error);
+    if (!data || data.length === 0) return console.log("No forecast data found");
 
-      forecastArray.forEach((item, index) => {
-        const time = item.time;
-        const condition = item.condition;
-        const conditionLower = condition.toLowerCase();
+    data.forEach((f, i) => {
+      const timeEl = document.querySelector(`.Time${i+1}`);
+      const typeEl = document.querySelector(`.weather-type${i+1}`);
+      const iconEl = document.querySelector(`.weather-icon${i+1} img`);
 
-        if (index < 4) {
-          document.querySelector(`.Time${index + 1}`).textContent = time;
-          document.querySelector(`.weather-type${index + 1}`).textContent = condition;
+      if (timeEl) timeEl.textContent = f.forecast_time || "--";
+      if (typeEl) typeEl.textContent = f.condition || "N/A";
 
-          const iconElement = document.querySelector(`.weather-icon${index + 1} img`);
-          if (conditionLower.includes("sunny")) {
-            iconElement.src = "png/Sunny.png";
-          } else if (conditionLower.includes("rain")) {
-            iconElement.src = "png/rainyIcon.png";
-          } else if (conditionLower.includes("cloud") || conditionLower.includes("overcast")) {
-            iconElement.src = "png/forecastIcon.png";
-          } else {
-            iconElement.src = "png/forecastIcon.png";
-          }
-        }
-      });
-    })
-    .catch(error => {
-      console.error("Failed to load today's forecast:", error);
+      if (iconEl) {
+        const c = (f.condition || "").toLowerCase();
+        if (c.includes("sunny") || c.includes("clear")) iconEl.src = "png/Sunny.png";
+        else if (c.includes("cloud") || c.includes("overcast")) iconEl.src = "png/Cloudy.png";
+        else if (c.includes("rain") || c.includes("shower") || c.includes("storm")) iconEl.src = "png/rainyIcon.png";
+        else iconEl.src = "png/forecastIcon.png";
+      }
     });
+
+  } catch (err) {
+    console.error("Unexpected error:", err);
+  }
 }
 
-fetchForecastData();
-setInterval(fetchForecastData, 10000); // every 10 seconds
+updateTodaysForecast();
+setInterval(updateTodaysForecast, 3000); // refresh every 3 seconds
 
 // ICON + CLOUD-IMAGE TRIGGERS
 document.addEventListener("DOMContentLoaded", () => {
