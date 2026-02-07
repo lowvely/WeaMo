@@ -91,7 +91,7 @@ let myChart = new Chart(graph, {
       data: [],
       borderColor: 'orange',
       fill: false,
-      tension: 0.4
+      tension: 0.5
     }]
   },
   options: {
@@ -167,27 +167,32 @@ async function updateWeatherFromSupabase() {
 
     // All data for chart
     const { data: allData, error: allError } = await supabase
-      .from("weather_data")
-      .select("temperature, created_at")
-      .order("created_at", { ascending: true });
+    .from("weather_data")
+    .select("temperature, created_at")
+    .order("created_at", { ascending: false }) // get latest first
+    .limit(10); // last 10 rows
 
     if (allError) {
       console.error("Supabase error (graph):", allError);
-    } else if (allData) {
-      const labels = allData.map(row => {
-        const date = new Date(row.created_at);
-        return `${date.getHours()}:${String(date.getMinutes()).padStart(2, "0")}`;
-      });
-      const temps = allData.map(row => parseFloat(row.temperature));
+    } else if (allData && allData.length > 0) {
+      // reverse so chart is oldest → newest
+      const orderedData = allData.reverse();
 
+      const labels = orderedData.map(row => {
+      const date = new Date(row.created_at);
+      return `${date.getHours()}:${String(date.getMinutes()).padStart(2, "0")}`;
+    });
+
+      const temps = orderedData.map(row => parseFloat(row.temperature));
+      
       myChart.data.labels = labels;
       myChart.data.datasets[0].data = temps;
       myChart.update();
     }
 
-  } catch (err) {
-    console.error("Unexpected error:", err);
-  }
+    } catch (err) {
+      console.error("Unexpected error:", err);
+    }
 }
 
 updateWeatherFromSupabase();
@@ -204,6 +209,8 @@ async function updateTodaysForecast() {
 
     if (error) return console.error("Supabase error:", error);
     if (!data || data.length === 0) return console.log("No forecast data found");
+
+    const orderedData = data.reverse();
 
     data.forEach((f, i) => {
       const timeEl = document.querySelector(`.Time${i+1}`);
