@@ -65,13 +65,6 @@ themeSwitch.addEventListener("click", () => {
   myChart.update();
 });
 
-// // Helper to format time
-// function formatTime(rawTime) {
-//   const date = new Date(rawTime);
-//   if (isNaN(date)) return rawTime;
-//   return date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-// }
-
 // SUPABASE SETUP
 import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm";
 
@@ -156,7 +149,7 @@ async function updateWeatherFromSupabase() {
         if (condition.includes("sunny") || condition.includes("clear")) {
           forecastImage.src = "png/Sunny.png";
         } else if (condition.includes("cloud") || condition.includes("outcast")) {
-          forecastImage.src = "png/Cloudy.png";
+          forecastImage.src = "png/forecastIcon.png";
         } else if (condition.includes("rainy") || condition.includes("shower") || condition.includes("storm")) {
           forecastImage.src = "png/rainyIcon.png";
         } else {
