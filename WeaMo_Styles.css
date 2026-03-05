@@ -9,6 +9,9 @@
 }
 
 :root {
+  --info-font: #B0C4DE;
+  --team-name: white;
+  --team-bg: #1E1E2F;
   --title-color: #FF9E5E;
   --text-color: white;
   --container-color: #121A2C;
@@ -29,10 +32,11 @@
 
 /* THEME SWITCH */
 .lightmode {
+  --info-font: black;
+  --team-name: white;
+  --team-bg: #243E62;
   --title-color:#2D6A4F;
   --light-text-color:#113065;
-  /* --light-text-color: #567C8D; */
-  /* --text-color: #2F4156; */
   --text-color: #000035;
   --container-color: rgba(255, 255, 255, 0.5);
   --icon-color: #94A3B8;
@@ -553,78 +557,89 @@ html, body {
   display: flex;
   align-items: center;
   gap: 8px;
-  color: white;
   margin-bottom: 2%;
 }
 
-.subtext{
+#details-head-text{
+  color: var(--text-color);
+}
+
+#subtext{
   font-family:'Inter';
-  font-size: 9px;
+  font-size: 10px;
+  color: var(--info-font);
+  margin-top: 5px;
 }
 
 .info-icon {
   flex-shrink: 0;
   padding: 6px; 
-  background-color: #1e2a4d;
+  background-color: var(--highlight-bg);
   border-radius: 6px;
   display: flex;
   align-items: center;
   justify-content: center;
-  fill: #4A90E2;             /* makes the SVG icon white */
+  fill: var(--hum-color);
 }
 
 .info-content{
   padding: 40px;
-  color: #B0C4DE;
+  color: var(--info-font);
   text-align: justify;
 }
 
-.team-container {
+.info-content .footer{
+  font-size: 9px;
+  text-align: center;
+}
+
+.team-container{
     display: flex;
-    gap: 20px;
     justify-content: center;
-    margin-top: 30px;
-    flex-wrap: wrap; /* Makes it responsive on smaller screens */
+    gap: 40px;
+    padding: 60px 20px;
+    flex-wrap: wrap;
 }
 
-.team-member {
-    background-color: #1E1E2F; /* dark background similar to your image */
-    padding: 20px;
-    border-radius: 10px;
-    width: 250px;
+.team-member{
+    background: linear-gradient(180deg,#1f3a5f,#2d4b73);
+    width: 300px;
     text-align: center;
-    color: #ffffff;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-    transition: transform 0.3s;
+    padding: 40px 25px;
+    border-radius: 20px;
+    box-shadow: 0 15px 25px rgba(0,0,0,0.15);
+    color: white;
+    transition: transform 0.3s ease;
 }
 
-.team-member img {
-    width: 120px;
-    height: 120px;
+.team-member:hover{
+    transform: translateY(-8px);
+}
+
+.team-member img{
+    width: 130px;
+    height: 130px;
     object-fit: cover;
-    border-radius: 50%; /* circular images */
+    border-radius: 50%;
+    border: 5px solid #caa84a;
+    margin-bottom: 20px;
+}
+
+.team-member h4{
+    font-size: 20px;
+    margin-bottom: 8px;
+}
+
+.team-member .role{
+    color: #f0b429;
+    font-weight: 600;
     margin-bottom: 15px;
-    border: 3px solid #DB8B06; /* optional accent border */
 }
 
-.team-member h4 {
-    margin: 10px 0 5px 0;
-    font-size: 18px;
-}
-
-.team-member .role {
-    color: #DB8B06; /* highlight role */
-    font-weight: bold;
-    margin-bottom: 10px;
-}
-
-.team-member .desc {
+.team-member .desc{
     font-size: 14px;
-    color: #cccccc;
-}
-
-.team-member:hover {
-    transform: translateY(-5px); /* subtle hover effect */
+    color: #d9e1ec;
+    line-height: 1.5;
 }
 
 @media only screen and (max-width: 1080px){
