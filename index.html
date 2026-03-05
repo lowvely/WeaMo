@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html>
-    <script type="module" src="weamo-script.js"></script>
+    
     <head>
         <title>WeaMo</title>
         <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
         <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700;800&display=swap" rel="stylesheet">
-        <link rel="stylesheet" href="WeaMo_Styles.css?v=20">
+        <link rel="stylesheet" href="WeaMo_Styles.css?v=21">
     </head>
 
     <body>
@@ -165,29 +165,63 @@
 
             <!-- About Us -->
             <div class="about-container hidden">
-            <div class="about-title">About WeaMo</div>
-            <div class="about-content">
-                <p>
-                <strong>WeaMo</strong> is a weather monitoring system designed to provide
-                real-time weather data such as temperature, humidity, wind speed,
-                pressure, and cloud formation.
-                </p>
+                <div class="info-content">
+                    <div class="details-title"> 
+                        <svg class="info-icon" xmlns="http://www.w3.org/2000/svg" height="40px" viewBox="0 -960 960 960" width="40px" fill="#e3e3e3"><path d="M356-260h248v-32H356v32Zm0-144h248v-32H356v32Zm-67.67 268Q264-136 248-152.15t-16-40.47v-574.76q0-24.32 16.15-40.47T288.62-824H596l132 132v499.38q0 24.32-16.16 40.47T671.34-136H288.33ZM568-664h128L568-792v128Z"/></></svg>
+                    <div><h3>WeaMo: An Autonomous Weather Monitoring and Prediction System</h3></div>
+                    </div>
+                    <div class="details">
+                        <p>
+                        <strong><span style="color: #DB8B06;">WeaMo</span></strong> is a real-time weather monitoring 
+                        and prediction system designed to provide localized, accurate weather data for specific areas. By 
+                        combining environmental sensors and cloud classification algorithms, WeaMo measures temperature, 
+                        humidity, wind speed, pressure, and cloud formations. The system uses a Raspberry Pi microcomputer to 
+                        process sensor data and images, applying machine learning techniques to predict short-term weather 
+                        conditions.
 
-                <p>
-                This project aims to help users understand current weather conditions
-                using data collected from sensors and visualized through charts and
-                forecasts.
-                </p>
+                        <br><br>
 
-                <p>
-                Developed as part of a Computer Engineering project, WeaMo combines
-                hardware sensing, data processing, and web-based visualization.
-                </p>
-            </div>
+                        Designed for agricultural applications, WeaMo delivers real-time updates through a mobile app, helping 
+                        farmers plan daily activities such as watering, fertilizing, and harvesting. Powered by solar energy and 
+                        optimized for specific locations, the system ensures sustainability and accessibility. By integrating 
+                        multiple sources of information—both sensor readings and cloud imagery—WeaMo offers a more precise and 
+                        comprehensive approach than traditional weather forecasts.
+                        </p>
+
+                        <br><br>
+
+                        <div style="color: white; text-align: center;">
+                            <h3>Research Team</h3>
+                            <p style="font-size: 10px;">Meet the engineers behind <strong style="color: #DB8B06;">WeaMo</strong>.</p>
+                        </div>
+                    </div>
+
+                    <!-- Team Section -->
+                    <div class="team-container">
+                        <div class="team-member">
+                            <img src="png/jbmb.jpg" alt="Jumil Beem Balista">
+                            <h4>Jumil Beem M. Balista</h4>
+                            <p class="role">Pangit Pangit Pangit</p>
+                            <p class="desc">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                        </div>
+                        <div class="team-member">
+                            <img src="png/lovely.jpg" alt="Lovely Lasay">
+                            <h4>Lovely S. Lasay</h4>
+                            <p class="role">cute pretty lovely</p>
+                            <p class="desc">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                        </div>
+                        <div class="team-member">
+                            <img src="png/bading.jpg" alt="Maximo V. Cagay Jr.">
+                            <h4>Maximo V. Cagay Jr.</h4>
+                            <p class="role">Bading Bading Bading</p>
+                            <p class="desc">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                        </div>
+                    </div>
+                </div>
             </div>
 
         </div>
 
-        
+        <script type="module" src="weamo-script.js"></script>
    </body>
 </html>

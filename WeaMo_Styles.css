@@ -237,6 +237,7 @@ html, body {
   padding: 20px;
   font-family: 'Inter';
   font-size: 1.1vw;
+  
 }
 
 .aboutUsIcon{
@@ -472,16 +473,27 @@ html, body {
 }
 
 /* CLOUD IMAGE */
-.cloud-image-container {
+/* .cloud-image-container {
   border-radius: 20px;
   position: relative;
   align-items: flex-end;
   display: flex;
   height: 100%; /* or a specific height like 200px */
-  background: 
+  /* background: 
     linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), 
     url('altocumulus.jpg') center/cover no-repeat;
   text-decoration: none;
+} */ */
+
+.cloud-image-container {
+  border-radius: 20px;
+  position: relative;
+  align-items: flex-end;
+  display: flex;
+  height: 100%;
+  text-decoration: none;
+  background-size: cover;
+  background-position: center;
 }
 
 .cloud-label {
@@ -492,21 +504,18 @@ html, body {
     z-index: 1;
   }
 
-.cloud-image-container:hover {
+/* .cloud-image-container:hover {
   cursor: pointer;
   background: 
     linear-gradient(rgba(78, 81, 84, 0.4), rgba(78, 81, 84, 0.4)), 
     url('altocumulus.jpg') center/cover no-repeat;
-}
+} */
 
 .cloud-details-container {
   width: 257%;     
   height: 235%;   
   border-radius: 12px;
   padding: 20px;
-  background: 
-    linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), 
-    url('altocumulus.jpg') center/cover no-repeat;
 }
 
 
@@ -531,6 +540,92 @@ html, body {
   display: none;
 }
 
+/* INFO */
+.about-container{
+  overflow: auto;
+}
+
+.about-container::-webkit-scrollbar {
+    display: none;
+}
+
+.details-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: white;
+  margin-bottom: 2%;
+}
+
+.subtext{
+  font-family:'Inter';
+  font-size: 9px;
+}
+
+.info-icon {
+  flex-shrink: 0;
+  padding: 6px; 
+  background-color: #1e2a4d;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  fill: #4A90E2;             /* makes the SVG icon white */
+}
+
+.info-content{
+  padding: 40px;
+  color: #B0C4DE;
+  text-align: justify;
+}
+
+.team-container {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    margin-top: 30px;
+    flex-wrap: wrap; /* Makes it responsive on smaller screens */
+}
+
+.team-member {
+    background-color: #1E1E2F; /* dark background similar to your image */
+    padding: 20px;
+    border-radius: 10px;
+    width: 250px;
+    text-align: center;
+    color: #ffffff;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    transition: transform 0.3s;
+}
+
+.team-member img {
+    width: 120px;
+    height: 120px;
+    object-fit: cover;
+    border-radius: 50%; /* circular images */
+    margin-bottom: 15px;
+    border: 3px solid #DB8B06; /* optional accent border */
+}
+
+.team-member h4 {
+    margin: 10px 0 5px 0;
+    font-size: 18px;
+}
+
+.team-member .role {
+    color: #DB8B06; /* highlight role */
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.team-member .desc {
+    font-size: 14px;
+    color: #cccccc;
+}
+
+.team-member:hover {
+    transform: translateY(-5px); /* subtle hover effect */
+}
 
 @media only screen and (max-width: 1080px){
   * {

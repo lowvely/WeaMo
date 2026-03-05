@@ -73,7 +73,56 @@ const supabase = createClient(
   "sb_publishable_RKTJjRPrvJym2wq6ptrvOA_lPG8OiFS"
 );
 
-// Graph Setup
+//CLOUD IMAGE SETUP
+const bucketName = "cloud_images";
+const cloudContainer = document.querySelector(".cloud-image-container");
+
+async function fetchLatestImage() {
+  try {
+    const { data, error } = await supabase
+      .storage
+      .from(bucketName)
+      .list("", { sortBy: { column: "created_at", order: "desc" }, limit: 1 });
+
+    if (error) {
+      console.error("Error fetching images:", error);
+      return;
+    }
+
+    if (!data || data.length === 0) {
+      console.log("No images found in bucket.");
+      return;
+    }
+
+    const latestFile = data[0].name;
+    console.log("Latest file:", latestFile);
+
+    const { data: publicUrlData, error: urlError } = supabase
+      .storage
+      .from(bucketName)
+      .getPublicUrl(latestFile);
+
+    if (urlError) {
+      console.error("Error getting public URL:", urlError);
+      return;
+    }
+
+    const imageUrl = publicUrlData.publicUrl;
+    console.log("Public URL:", imageUrl);
+
+    cloudContainer.style.background = `
+      linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)),
+      url('${imageUrl}?t=${new Date().getTime()}') center/cover no-repeat
+    `;
+  } catch (err) {
+    console.error("Unexpected error:", err);
+  }
+}
+
+document.addEventListener("DOMContentLoaded", fetchLatestImage);
+setInterval(fetchLatestImage, 1000);
+
+// GRAPH SETUP
 const graph = document.getElementById('graph');
 
 let myChart = new Chart(graph, {
@@ -191,7 +240,7 @@ async function updateWeatherFromSupabase() {
 updateWeatherFromSupabase();
 setInterval(updateWeatherFromSupabase, 3000); // refresh every 3 seconds
 
-// Today's Forecats -FETCH LAST 3 FORECASTS-
+// Today's Forecast - FETCH LAST 3 FORECASTS WITH RELATIVE TIME
 async function updateTodaysForecast() {
   try {
     const { data, error } = await supabase
@@ -203,16 +252,27 @@ async function updateTodaysForecast() {
     if (error) return console.error("Supabase error:", error);
     if (!data || data.length === 0) return console.log("No forecast data found");
 
-    const orderedData = data.reverse();
+    const orderedData = data.reverse(); // optional
 
-    data.forEach((f, i) => {
+    const now = new Date();
+
+    orderedData.forEach((f, i) => {
       const timeEl = document.querySelector(`.Time${i+1}`);
       const typeEl = document.querySelector(`.weather-type${i+1}`);
       const iconEl = document.querySelector(`.weather-icon${i+1} img`);
 
-      if (timeEl) timeEl.textContent = f.forecast_time || "--";
+      // Set relative time
+      let displayTime = new Date(now);
+      if (i === 0) displayTime.setHours(displayTime.getHours() - 1); // minus 1 hour
+      else if (i === 2) displayTime.setHours(displayTime.getHours() + 1); // plus 1 hour
+      // i === 1 is current time
+
+      if (timeEl) timeEl.textContent = displayTime.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+
+      // Set condition
       if (typeEl) typeEl.textContent = f.condition || "N/A";
 
+      // Set icon
       if (iconEl) {
         const c = (f.condition || "").toLowerCase();
         if (c.includes("sunny") || c.includes("clear")) iconEl.src = "png/Sunny.png";
@@ -291,3 +351,8 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
 });
+
+cloudContainer.style.background = `
+  linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)),
+  url('https://picsum.photos/600/400') center/cover no-repeat
+`;
