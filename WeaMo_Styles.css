@@ -69,13 +69,15 @@
   all: unset;
   height: 3.1vw;
   width: 3.1vw;
-  padding: 0;
+  /* padding: 0; */
   border-radius: 50%;
   display: flex;
   justify-content: center;
   align-items: center;
   cursor: pointer;
-  padding-top: 870%;
+
+  margin-top: auto;
+  margin-bottom: 20%;
 }
 
 #switch svg{
@@ -157,6 +159,8 @@ html, body {
   flex-direction: column;
   align-items: center;
   overflow: hidden;
+
+  height: 100%;
   
   .logo img {
     width: 100%;
@@ -177,7 +181,7 @@ html, body {
   }
 
   .sideIcon {
-    width: 2.5vh;
+    width: 1.5vw;
     height: auto;
     fill: var(--icon-color);
   }
@@ -273,16 +277,18 @@ html, body {
     display: inline-flex;
     align-items: center;
     padding: 8px 10px;
-    width: 44%;
+    width: fit-content;
+    max-width: 100%;
     background-color: var(--accent-color);
     color: var(--text-color);
-    /* box-shadow: var(--box-shadow-color); */
-    /* border: var(--border-color); */
     font-family: 'Inter';
     border-radius: 50px;
     font-size: 1vw;
     font-weight: 500;
     letter-spacing: .5px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 
   .location-icon {
@@ -603,7 +609,8 @@ html, body {
 
 .team-member{
     background: linear-gradient(180deg,#1f3a5f,#2d4b73);
-    width: 300px;
+    width: 18vw;
+    min-width: 220px;
     text-align: center;
     padding: 40px 25px;
     border-radius: 20px;
@@ -617,8 +624,10 @@ html, body {
 }
 
 .team-member img{
-    width: 130px;
-    height: 130px;
+    width: 7vw;
+    height: 7vw;
+    min-width: 80px;
+    min-height: 80px;
     object-fit: cover;
     border-radius: 50%;
     border: 5px solid #caa84a;
@@ -626,7 +635,7 @@ html, body {
 }
 
 .team-member h4{
-    font-size: 20px;
+    font-size: 1.3vw;
     margin-bottom: 8px;
 }
 
@@ -634,12 +643,14 @@ html, body {
     color: #f0b429;
     font-weight: 600;
     margin-bottom: 15px;
+    font-size: 1vw;
 }
 
 .team-member .desc{
     font-size: 14px;
     color: #d9e1ec;
     line-height: 1.5;
+    font-size: 0.9vw;
 }
 
 @media only screen and (max-width: 1080px){
@@ -664,7 +675,7 @@ html, body {
 
   .side-panel-container{
     .sideIcon{
-      width: 3vw;
+      width: 2vw;
       height: auto;
     }
   }
@@ -687,5 +698,9 @@ html, body {
 
   .cloud-details-container {
   height: 249%;   
+  }
+
+  .about-container{
+    height: 250%;
   }
 }
