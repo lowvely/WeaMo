@@ -52,17 +52,6 @@
   --pres-color: #A855F7;
   
   background: linear-gradient(180deg, #E7F5E8 0%, #FEF3C7 100%);
-
-  .cloud-image-container{
-    background: 
-      linear-gradient(rgba(190, 220, 192, 0.4), rgba(227, 237, 225, 0.4)), 
-      url('altocumulus.jpg') center/cover no-repeat;
-  }
-  
-  .cloud-details-container{
-    background:  
-      url('altocumulus.jpg') center/cover no-repeat;
-  }
 }
 
 #switch{
@@ -482,19 +471,6 @@ html, body {
   }
 }
 
-/* CLOUD IMAGE */
-/* .cloud-image-container {
-  border-radius: 20px;
-  position: relative;
-  align-items: flex-end;
-  display: flex;
-  height: 100%; /* or a specific height like 200px */
-  /* background: 
-    linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), 
-    url('altocumulus.jpg') center/cover no-repeat;
-  text-decoration: none;
-} */ */
-
 .cloud-image-container {
   border-radius: 20px;
   position: relative;
@@ -514,12 +490,9 @@ html, body {
     z-index: 1;
   }
 
-/* .cloud-image-container:hover {
+.cloud-image-container:hover {
   cursor: pointer;
-  background: 
-    linear-gradient(rgba(78, 81, 84, 0.4), rgba(78, 81, 84, 0.4)), 
-    url('altocumulus.jpg') center/cover no-repeat;
-} */
+}
 
 .cloud-details-container {
   width: 257%;     
@@ -527,7 +500,6 @@ html, body {
   border-radius: 12px;
   padding: 20px;
 }
-
 
 /* OVERVIEW */
 .overview-container{

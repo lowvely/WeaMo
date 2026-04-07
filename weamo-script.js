@@ -65,62 +65,58 @@ themeSwitch.addEventListener("click", () => {
   myChart.update();
 });
 
-// SUPABASE SETUP
 import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm";
 
+// Supabase client (you already have this)
 const supabase = createClient(
   "https://ixofcczytuiaulkqtuks.supabase.co",
   "sb_publishable_RKTJjRPrvJym2wq6ptrvOA_lPG8OiFS"
 );
 
-//CLOUD IMAGE SETUP
-const bucketName = "cloud_images";
-const cloudContainer = document.querySelector(".cloud-image-container");
+const cloudContainer = document.getElementById("cloudContainer");
+const cloudDetailsContainer = document.querySelector(".cloud-details-container");
 
-async function fetchLatestImage() {
+// Function to load latest image from Supabase
+async function loadLatestCloudImage() {
   try {
     const { data, error } = await supabase
-      .storage
-      .from(bucketName)
-      .list("", { sortBy: { column: "created_at", order: "desc" }, limit: 1 });
+      .from("cloud_images_meta")
+      .select("filename")
+      .order("uploaded_at", { ascending: false })
+      .limit(1);
 
-    if (error) {
-      console.error("Error fetching images:", error);
-      return;
-    }
-
+    if (error) throw error;
     if (!data || data.length === 0) {
-      console.log("No images found in bucket.");
+      cloudContainer.innerHTML = "<p>No images found</p>";
+      cloudDetailsContainer.innerHTML = "<p>No images found</p>";
       return;
     }
 
-    const latestFile = data[0].name;
-    console.log("Latest file:", latestFile);
+    const latestFile = data[0].filename;
+    const imageUrl = `https://ixofcczytuiaulkqtuks.supabase.co/storage/v1/object/public/cloud_images/${latestFile}`;
 
-    const { data: publicUrlData, error: urlError } = supabase
-      .storage
-      .from(bucketName)
-      .getPublicUrl(latestFile);
-
-    if (urlError) {
-      console.error("Error getting public URL:", urlError);
-      return;
-    }
-
-    const imageUrl = publicUrlData.publicUrl;
-    console.log("Public URL:", imageUrl);
-
+    // Update main container
     cloudContainer.style.background = `
       linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)),
-      url('${imageUrl}?t=${new Date().getTime()}') center/cover no-repeat
+      url('${imageUrl}') center/cover no-repeat
     `;
+
+    // Update details container to match
+    copyCloudContainerContent();
+
   } catch (err) {
-    console.error("Unexpected error:", err);
+    console.error("Error loading latest image:", err);
   }
 }
 
-document.addEventListener("DOMContentLoaded", fetchLatestImage);
-setInterval(fetchLatestImage, 1000);
+function copyCloudContainerContent() {
+  cloudDetailsContainer.style.background = cloudContainer.style.background;
+  cloudDetailsContainer.innerHTML = "";
+}
+
+loadLatestCloudImage();
+
+setInterval(loadLatestCloudImage, 10000);
 
 // GRAPH SETUP
 const graph = document.getElementById('graph');
@@ -352,7 +348,3 @@ document.addEventListener("DOMContentLoaded", () => {
 
 });
 
-cloudContainer.style.background = `
-  linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)),
-  url('https://picsum.photos/600/400') center/cover no-repeat
-`;
