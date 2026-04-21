@@ -330,7 +330,20 @@ html, body {
   .forecastImage {
     max-width: 100%;
     height: auto;
+    animation: moveCloud 10s linear infinite,
+             floatCloud 3s ease-in-out infinite;
   }
+
+}
+
+@keyframes moveCloud {
+  0% { transform: translateX(-120px); }
+  100% { transform: translateX(120px); }
+}
+
+@keyframes floatCloud {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
 }
 
 /* TODAY'S FORECAST */
@@ -338,6 +351,7 @@ html, body {
   display: flex;
   flex-direction: column;
   overflow: hidden;
+  
 
   .todays-forecast-title {
     font-family: 'Inter';
@@ -345,11 +359,14 @@ html, body {
     font-size: 1.9vh;
     text-align: center;
     padding: 4%;
+    padding-top: 10%;
   }
 
   .details-container {
     display: flex;
     flex-direction: column;
+    padding-left: 5%;
+    padding-right: 5%;
   }
 
   .details-container > div {
@@ -383,7 +400,7 @@ html, body {
     background: var(--accent-color);
     color: var(--text-color);
     font-weight: 400;
-    border-radius: 20px;
+    border-radius: 30px;
     border: 1px solid rgba(255, 255, 255, 0.2);
     box-shadow: 0 10px 25px -5px rgba(255, 140, 66, 0.4);
   }
