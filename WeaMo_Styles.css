@@ -196,22 +196,6 @@ html, body {
   fill: var(--side-icon-clicked);
 }
 
-/* Active state → icon turns white */
-/* .about-us-container > div.active{
-  padding-top: 15%;
-  padding-left: 15%;
-  padding-right: 15%;
-  padding-bottom: 9%;
-  background-color: var(--accent-color);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  box-shadow: 0 10px 25px -5px rgba(255, 140, 66, 0.4);
-  border-radius: 35%;
-}
-
-.about-us-container >div.active .sideIcon{
-  fill: var(--side-icon-clicked);
-} */
-
 .about-container {
   width: 257%;     
   height: 235%;   
@@ -337,7 +321,6 @@ html, body {
   flex-direction: column;
   overflow: hidden;
   
-
   .todays-forecast-title {
     font-family: 'Inter';
     font-weight: 800;

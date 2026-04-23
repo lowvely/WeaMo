@@ -239,44 +239,82 @@ setInterval(updateWeatherFromSupabase, 3000); // refresh every 3 seconds
 // Today's Forecast - FETCH LAST 3 FORECASTS WITH RELATIVE TIME
 async function updateTodaysForecast() {
   try {
-    const { data, error } = await supabase
+    // 🔹 Get last 2 from weather_forecast
+    const { data: forecastData, error: forecastError } = await supabase
       .from("weather_forecast")
       .select("*")
       .order("created_at", { ascending: false })
-      .limit(3);
+      .limit(2);
 
-    if (error) return console.error("Supabase error:", error);
-    if (!data || data.length === 0) return console.log("No forecast data found");
+    if (forecastError) {
+      console.error("Forecast error:", forecastError);
+      return;
+    }
 
-    const orderedData = data.reverse(); // optional
+    // 🔹 Get latest 1 from weather_forecast_advance
+    const { data: advanceData, error: advanceError } = await supabase
+      .from("weather_forecast_advance")
+      .select("*")
+      .order("created_at", { ascending: false })
+      .limit(1)
+      .single();
+
+    if (advanceError) {
+      console.error("Advance forecast error:", advanceError);
+    }
 
     const now = new Date();
 
-    orderedData.forEach((f, i) => {
-      const timeEl = document.querySelector(`.Time${i+1}`);
-      const typeEl = document.querySelector(`.weather-type${i+1}`);
-      const iconEl = document.querySelector(`.weather-icon${i+1} img`);
+    // =========================
+    // 🔹 SLOT 1 & 2 (normal forecast)
+    // =========================
+    if (forecastData && forecastData.length > 0) {
+      const ordered = forecastData.reverse(); // oldest → newest
 
-      // Set relative time
-      let displayTime = new Date(now);
-      if (i === 0) displayTime.setHours(displayTime.getHours() - 1); // minus 1 hour
-      else if (i === 2) displayTime.setHours(displayTime.getHours() + 1); // plus 1 hour
-      // i === 1 is current time
+      ordered.forEach((f, i) => {
+        const timeEl = document.querySelector(`.Time${i+1}`);
+        const typeEl = document.querySelector(`.weather-type${i+1}`);
+        const iconEl = document.querySelector(`.weather-icon${i+1} img`);
 
-      if (timeEl) timeEl.textContent = displayTime.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+        let displayTime = new Date(now);
+        if (i === 0) displayTime.setHours(displayTime.getHours() - 1);
+        else if (i === 1) displayTime.setHours(displayTime.getHours());
 
-      // Set condition
-      if (typeEl) typeEl.textContent = f.condition || "N/A";
+        if (timeEl) timeEl.textContent = displayTime.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+        if (typeEl) typeEl.textContent = f.condition || "N/A";
 
-      // Set icon
+        if (iconEl) {
+          const c = (f.condition || "").toLowerCase();
+          if (c.includes("sunny") || c.includes("clear")) iconEl.src = "png/Sunny.png";
+          else if (c.includes("cloud") || c.includes("overcast")) iconEl.src = "png/Cloudy.png";
+          else if (c.includes("rain") || c.includes("storm")) iconEl.src = "png/rainyIcon.png";
+          else iconEl.src = "png/forecastIcon.png";
+        }
+      });
+    }
+
+    // =========================
+    // 🔹 SLOT 3 (advance forecast)
+    // =========================
+    if (advanceData) {
+      const timeEl = document.querySelector(`.Time3`);
+      const typeEl = document.querySelector(`.weather-type3`);
+      const iconEl = document.querySelector(`.weather-icon3 img`);
+
+      let futureTime = new Date(now);
+      futureTime.setHours(futureTime.getHours() + 1);
+
+      if (timeEl) timeEl.textContent = futureTime.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+      if (typeEl) typeEl.textContent = advanceData.condition || "N/A";
+
       if (iconEl) {
-        const c = (f.condition || "").toLowerCase();
+        const c = (advanceData.condition || "").toLowerCase();
         if (c.includes("sunny") || c.includes("clear")) iconEl.src = "png/Sunny.png";
         else if (c.includes("cloud") || c.includes("overcast")) iconEl.src = "png/Cloudy.png";
-        else if (c.includes("rain") || c.includes("shower") || c.includes("storm")) iconEl.src = "png/rainyIcon.png";
+        else if (c.includes("rain") || c.includes("storm")) iconEl.src = "png/rainyIcon.png";
         else iconEl.src = "png/forecastIcon.png";
       }
-    });
+    }
 
   } catch (err) {
     console.error("Unexpected error:", err);
