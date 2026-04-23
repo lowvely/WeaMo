@@ -6,7 +6,7 @@
         <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
         <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700;800&display=swap" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;800&display=swap" rel="stylesheet">
-        <link rel="stylesheet" href="WeaMo_Styles.css?v=27">
+        <link rel="stylesheet" href="WeaMo_Styles.css?v=28">
     </head>
 
     <body>
@@ -161,7 +161,9 @@
                 <canvas id="graph" width="400" height="200"></canvas>
             </div>
 
-            <div class="cloud-details-container hidden"></div>
+            <div class="cloud-details-container hidden">
+                <div class="cloud-close-btn">×</div>
+            </div>
 
             <!-- About Us -->
             <div class="about-container hidden">
@@ -226,5 +228,6 @@
         </div>
 
         <script type="module" src="weamo-script.js"></script>
+        <div class="forecast-tooltip" id="forecastTooltip"></div>
    </body>
 </html>

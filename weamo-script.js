@@ -111,7 +111,6 @@ async function loadLatestCloudImage() {
 
 function copyCloudContainerContent() {
   cloudDetailsContainer.style.background = cloudContainer.style.background;
-  cloudDetailsContainer.innerHTML = "";
 }
 
 loadLatestCloudImage();
@@ -216,12 +215,22 @@ async function updateWeatherFromSupabase() {
       // reverse so chart is oldest → newest
       const orderedData = allData.reverse();
 
-      const labels = orderedData.map(row => {
-      const date = new Date(row.created_at);
-      return `${date.getHours()}:${String(date.getMinutes()).padStart(2, "0")}`;
-    });
+      const hourlyMap = new Map();
 
-      const temps = orderedData.map(row => parseFloat(row.temperature));
+      orderedData.forEach(row => {
+        const date = new Date(row.created_at);
+        const hourKey = `${date.getHours()}:00`;
+
+        if (!hourlyMap.has(hourKey)) {
+          hourlyMap.set(hourKey, []);
+        }
+
+        hourlyMap.set(hourKey, parseFloat(row.temperature));
+      });
+
+      // convert map to arrays
+      const labels = Array.from(hourlyMap.keys()).reverse();
+      const temps = Array.from(hourlyMap.values()).reverse();
       
       myChart.data.labels = labels;
       myChart.data.datasets[0].data = temps;
@@ -324,6 +333,49 @@ async function updateTodaysForecast() {
 updateTodaysForecast();
 setInterval(updateTodaysForecast, 3000); // refresh every 3 seconds
 
+//TOOLTIP
+const forecast3 = document.querySelector(".todays-forecast3");
+const tooltip = document.getElementById("forecastTooltip");
+const cloudImageContainer = document.querySelector(".cloud-image-container");
+
+// text you want to show
+const forecastText = "Weather forecast for the next hour based on the latest available data.";
+const cloudTooltipText = "Live cloud image captured via on-site camera.";
+
+forecast3.addEventListener("mouseenter", () => {
+  tooltip.style.opacity = "1";
+  tooltip.style.transform = "translate(10px, 10px) scale(1)";
+  tooltip.textContent = forecastText;
+});
+
+forecast3.addEventListener("mouseleave", () => {
+  tooltip.style.opacity = "0";
+  tooltip.style.transform = "translate(10px, 10px) scale(0.95)";
+});
+
+forecast3.addEventListener("mousemove", (e) => {
+  tooltip.style.left = e.clientX + 18 + "px";
+  tooltip.style.top = e.clientY + 18 + "px";
+});
+
+cloudImageContainer.addEventListener("mouseenter", () => {
+  tooltip.style.opacity = "1";
+  tooltip.style.transform = "translate(10px, 10px) scale(1)";
+  tooltip.textContent = cloudTooltipText;
+});
+
+cloudImageContainer.addEventListener("mouseleave", () => {
+  tooltip.style.opacity = "0";
+  tooltip.style.transform = "translate(10px, 10px) scale(0.95)";
+});
+
+cloudImageContainer.addEventListener("mousemove", (e) => {
+  tooltip.style.left = e.clientX + 18 + "px";
+  tooltip.style.top = e.clientY + 18 + "px";
+});
+
+let openedFromDashboard = false;
+
 // ICON + CLOUD-IMAGE TRIGGERS
 document.addEventListener("DOMContentLoaded", () => {
   const cloudIcon = document.querySelector(".clouds-container");
@@ -331,6 +383,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const homeIcon = document.querySelector(".home-container");
   const aboutIcon = document.querySelector(".about-us-container");
   const aboutContainer = document.querySelector(".about-container");
+  const closeBtn = document.querySelector(".cloud-close-btn");
 
   const sections = document.querySelectorAll(
     ".current-forecast-container, .todays-forecast-container, .todays-highlight-container, .cloud-image-container, .overview-container"
@@ -363,22 +416,35 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // clicking cloud icon
   cloudIcon.addEventListener("click", () => {
+    openedFromDashboard = false;
+
     sections.forEach(el => el.classList.add("hidden"));
     aboutContainer.classList.add("hidden");
     cloudDetails.classList.remove("hidden");
+
+    // hide label in cloud view
     cloudDetails.appendChild(cloudLabel);
     cloudLabel.style.display = "none";
+
+    closeBtn.style.display = "none";
+
     setActive(cloudIcon);
   });
 
   // clicking cloud image (acts same as cloud icon)
   cloudImage.addEventListener("click", () => {
+    openedFromDashboard = true;
+
     sections.forEach(el => el.classList.add("hidden"));
     aboutContainer.classList.add("hidden");
     cloudDetails.classList.remove("hidden");
+
     cloudDetails.appendChild(cloudLabel);
     cloudLabel.style.display = "none";
-    setActive(cloudIcon); // make the side cloud icon white
+
+    closeBtn.style.display = "flex";
+
+    setActive(cloudIcon);
   });
 
   // clicking about us
@@ -387,6 +453,20 @@ document.addEventListener("DOMContentLoaded", () => {
     cloudDetails.classList.add("hidden");
     aboutContainer.classList.remove("hidden"); // show about section
     setActive(aboutIcon);
+  });
+
+  closeBtn.addEventListener("click", () => {
+    if (!openedFromDashboard) return;
+
+    cloudDetails.classList.add("hidden");
+
+    // show dashboard sections again
+    sections.forEach(el => el.classList.remove("hidden"));
+
+    cloudContainer.appendChild(cloudLabel);
+    cloudLabel.style.display = "block";
+
+    setActive(homeIcon);
   });
 
 });
