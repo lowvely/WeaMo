@@ -85,21 +85,6 @@
   display: block;
 }
 
-/* FONT */
-@font-face {
-  font-family: 'Inter';
-  src: url('Inter-Regular.ttf') format('truetype');
-  font-weight: 400;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: 'Poppins';
-  src: url('Poppins-Regular.ttf') format('truetype');
-  font-weight: 400;
-  font-style: normal;
-}
-
 html, body {
   background-color: var(--main-bg-color);
   height: 100%;
@@ -212,7 +197,7 @@ html, body {
 }
 
 /* Active state → icon turns white */
-.about-us-container > div.active{
+/* .about-us-container > div.active{
   padding-top: 15%;
   padding-left: 15%;
   padding-right: 15%;
@@ -225,7 +210,7 @@ html, body {
 
 .about-us-container >div.active .sideIcon{
   fill: var(--side-icon-clicked);
-}
+} */
 
 .about-container {
   width: 257%;     
@@ -442,7 +427,19 @@ html, body {
     justify-content: space-between;
     padding-left: 1%;
     padding-right: 1%;
+    padding: 10px;
   }
+
+.highlight-container:hover .highlight-row {
+    opacity: 0.5;
+    transform: scale(0.98);
+}
+
+.highlight-container .highlight-row:hover {
+    opacity: 1;
+    transform: scale(1.06);
+    z-index: 2;
+}
 
   .title {
     display: flex;

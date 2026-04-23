@@ -313,12 +313,15 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // clicking home
   homeIcon.addEventListener("click", () => {
-    sections.forEach(el => el.classList.remove("hidden"));
-    cloudDetails.classList.add("hidden");
-    aboutContainer.classList.add("hidden");
-    document.querySelector(".cloud-image-container").appendChild(cloudLabel);
-    setActive(homeIcon);
-  });
+  sections.forEach(el => el.classList.remove("hidden"));
+  cloudDetails.classList.add("hidden");
+  aboutContainer.classList.add("hidden");
+
+  document.querySelector(".cloud-image-container").appendChild(cloudLabel);
+  cloudLabel.style.display = "block"; // show again
+
+  setActive(homeIcon);
+});
 
   // clicking cloud icon
   cloudIcon.addEventListener("click", () => {
@@ -326,6 +329,7 @@ document.addEventListener("DOMContentLoaded", () => {
     aboutContainer.classList.add("hidden");
     cloudDetails.classList.remove("hidden");
     cloudDetails.appendChild(cloudLabel);
+    cloudLabel.style.display = "none";
     setActive(cloudIcon);
   });
 
@@ -335,6 +339,7 @@ document.addEventListener("DOMContentLoaded", () => {
     aboutContainer.classList.add("hidden");
     cloudDetails.classList.remove("hidden");
     cloudDetails.appendChild(cloudLabel);
+    cloudLabel.style.display = "none";
     setActive(cloudIcon); // make the side cloud icon white
   });
 
