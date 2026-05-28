@@ -834,7 +834,7 @@ html, body {
     top: 0;
     left: 0;
     width: 100%;
-    padding: 10px;
+    padding: 25px;
     row-gap: 10px;
     column-gap: 0;
   }
@@ -935,6 +935,8 @@ html, body {
     }
   }
 
+  
+
   /* ── Shared section title style ── */
   .todays-forecast-title,
   .todays-highlight-title,
@@ -976,6 +978,18 @@ html, body {
       gap: 6px;
     }
 
+    /* Remove hover effects on Today's Forecast */
+    .details-container:hover > div {
+      opacity: 1;
+      transform: none;
+    }
+
+    .details-container > div:hover {
+      opacity: 1;
+      transform: none;
+      z-index: unset;
+    }
+
     /* time label */
     .Time1, .Time2, .Time3 {
       font-size: 10px;
@@ -997,6 +1011,7 @@ html, body {
       min-width: unset;
       text-align: center;
     }
+    
 
     /* icon container */
     .weather-icon1, .weather-icon2, .weather-icon3 {
@@ -1024,6 +1039,18 @@ html, body {
       width: 100%;
     }
 
+    /* Remove hover effects on Today's Highlight */
+    .highlight-container:hover .highlight-row {
+      opacity: 1;
+      transform: none;
+    }
+
+    .highlight-container .highlight-row:hover {
+      opacity: 1;
+      transform: none;
+      z-index: unset;
+    }
+
     .highlight-row {
       width: 100%;
       flex-direction: column;
@@ -1032,9 +1059,6 @@ html, body {
       text-align: center;
       gap: 6px;
       padding: 16px 10px;
-      /* background: rgba(255, 255, 255, 0.05);
-      border-radius: 16px;
-      border: 1px solid rgba(255, 255, 255, 0.06); */
     }
 
     .line { display: none !important; }
@@ -1078,8 +1102,17 @@ html, body {
   }
 
   /* ── About panel ── */
+  .about-container {
+    position: fixed;
+    top: 95px;        /* ← increase top to add gap below nav */
+    left: 25px;
+    right: 25px;
+    bottom: 10%;
+    width: auto !important;
+  }
+
   .info-content {
-    padding: 20px 16px;
+    padding: 2px 16px;
     font-size: 13px;
   }
 
