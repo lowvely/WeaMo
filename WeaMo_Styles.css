@@ -5,7 +5,7 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  transition: all 0.3s ease;
+  transition: all 0.03s ease;
 }
 
 :root {
@@ -749,7 +749,7 @@ html, body {
 
 @media only screen and (max-width: 1080px){
   * {
-    transition: all 0.3s ease;
+    transition: all 0.03s ease;
   }
 
   .main-container {
@@ -852,15 +852,14 @@ html, body {
     position: relative;
     z-index: 200;
 
-    .logo img {
-      width: auto;
-      height: 30px;
+    .logo {
+      display: none;
     }
 
     .website-name {
-      font-size: 11px;
+      font-size: 14px;
       margin-top: 0;
-      margin-left: 5px;
+      margin-left: 10px;
     }
 
     .sideIcon {
@@ -887,7 +886,7 @@ html, body {
   }
 
   /* ── Overlays start BELOW the nav bar, not behind it ── */
-  .cloud-details-container,
+  /* .cloud-details-container, */
   .about-container {
     position: fixed;
     top: 68px;        /* clear the nav bar height */
@@ -900,6 +899,14 @@ html, body {
     z-index: 100;     /* below side-panel z-index: 200 */
     overflow-y: auto;
   }
+
+  .clouds-container {
+  display: none;
+  }
+
+  .cloud-image-container {
+  pointer-events: none;
+}
 
   /* ── Current forecast ── */
   .current-forecast-container {
@@ -1013,11 +1020,7 @@ html, body {
     justify-content: center;
 
     .highlight-container {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      grid-template-rows: auto auto;
-      gap: 10px;
-      margin-left: 0;
+      margin-left: 0;        /* removes the 3% left offset from base styles */
       width: 100%;
     }
 
@@ -1029,9 +1032,9 @@ html, body {
       text-align: center;
       gap: 6px;
       padding: 16px 10px;
-      background: rgba(255, 255, 255, 0.05);
+      /* background: rgba(255, 255, 255, 0.05);
       border-radius: 16px;
-      border: 1px solid rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.06); */
     }
 
     .line { display: none !important; }
@@ -1071,15 +1074,7 @@ html, body {
 
   /* ── Overview chart ── */
   .overview-container {
-    height: 220px;
-    min-height: unset;
-    padding: 16px 14px 12px;
-
-    #graph {
-      width: 100%;
-      height: calc(100% - 32px);
-      max-height: 170px;
-    }
+    display: none;
   }
 
   /* ── About panel ── */
