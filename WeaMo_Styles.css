@@ -798,3 +798,362 @@ html, body {
     height: 250%;
   }
 }
+
+/* ============================================================
+   WeaMo – Mobile Styles  (≤ 768px)
+   Paste this AFTER your existing @media (max-width: 1080px) block
+   in WeaMo_Styles.css
+   ============================================================ */
+
+@media only screen and (max-width: 768px) {
+
+  /* ── Fix light mode background bleeding on mobile ── */
+  html, body {
+    min-height: 100%;
+    height: auto;
+  }
+
+  .lightmode {
+    background: linear-gradient(180deg, #E7F5E8 0%, #FEF3C7 100%) !important;
+    background-attachment: fixed !important;
+    min-height: 100vh;
+  }
+
+  /* Main grid → single column, full width ── */
+  .main-container {
+    grid-template-areas:
+      "side-panel-container"
+      "current-forecast-container"
+      "todays-forecast-container"
+      "todays-highlight-container"
+      "cloud-image-container"
+      "overview-container";
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
+    height: auto;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 10px;
+    row-gap: 10px;
+    column-gap: 0;
+  }
+
+  /* ── Side panel → horizontal top nav, always visible ── */
+  .side-panel-container {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    height: auto;
+    padding: 8px 14px;
+    border-radius: 16px;
+    overflow: visible;
+    /* Keep on top so overlays never cover it */
+    position: relative;
+    z-index: 200;
+
+    .logo img {
+      width: auto;
+      height: 30px;
+    }
+
+    .website-name {
+      font-size: 11px;
+      margin-top: 0;
+      margin-left: 5px;
+    }
+
+    .sideIcon {
+      width: 20px;
+      height: 20px;
+    }
+
+    .home-container,
+    .clouds-container,
+    .about-us-container,
+    .theme-switch {
+      margin: 0 4px;
+    }
+  }
+
+  .side-panel-container > div.active {
+    padding: 8px 10px;
+    border-radius: 12px;
+  }
+
+  #switch {
+    height: 34px;
+    width: 34px;
+  }
+
+  /* ── Overlays start BELOW the nav bar, not behind it ── */
+  .cloud-details-container,
+  .about-container {
+    position: fixed;
+    top: 68px;        /* clear the nav bar height */
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100% !important;
+    height: calc(100% - 68px) !important;
+    border-radius: 0 0 16px 16px;
+    z-index: 100;     /* below side-panel z-index: 200 */
+    overflow-y: auto;
+  }
+
+  /* ── Current forecast ── */
+  .current-forecast-container {
+    padding: 14px 16px;
+
+    .location  { font-size: 11px; padding: 6px 10px; }
+    .date      { font-size: 11px; }
+    #time      { font-size: 10px; }
+    .condition { font-size: 15px; }
+
+    /* Smaller temp so it doesn't dominate */
+    .temp { font-size: 48px; margin-top: 2%; }
+
+    /* Larger animated image, proportional to container */
+    .current-forecast-icon {
+      max-width: 45%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .forecastImage {
+      width: 100%;
+      max-width: 160px;
+      height: auto;
+    }
+  }
+
+  /* ── Shared section title style ── */
+  .todays-forecast-title,
+  .todays-highlight-title,
+  .overview-title {
+    font-family: 'Inter', sans-serif !important;
+    font-size: 13px !important;
+    font-weight: 800 !important;
+    text-align: center !important;
+    letter-spacing: 0.4px;
+    margin-bottom: 14px !important;
+    padding: 0 !important;
+  }
+
+  /* ── Today's forecast ── */
+  .todays-forecast-container {
+    padding: 16px 14px 14px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    .details-container {
+      flex-direction: row;
+      gap: 8px;
+      padding: 0;
+      overflow: visible;
+    }
+
+    .details-container > div {
+      flex: 1;
+      min-width: 0;
+      height: auto;
+      min-height: 115px;
+      margin-bottom: 0;
+      border-radius: 16px;
+      padding: 14px 8px;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+    }
+
+    /* time label */
+    .Time1, .Time2, .Time3 {
+      font-size: 10px;
+      opacity: 0.7;
+      text-align: center;
+    }
+
+    /* condition text */
+    .weather-type1, .weather-type2, .weather-type3 {
+      font-size: 10px;
+      text-align: center;
+      line-height: 1.2;
+    }
+
+    .todays-forecast1 > div,
+    .todays-forecast2 > div,
+    .todays-forecast3 > div {
+      width: 100%;
+      min-width: unset;
+      text-align: center;
+    }
+
+    /* icon container */
+    .weather-icon1, .weather-icon2, .weather-icon3 {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .weather-icon {
+      width: 40px;
+      height: 40px;
+      object-fit: contain;
+    }
+  }
+
+  /* ── Today's highlight ── */
+  .todays-highlight-container {
+    padding: 16px 14px 14px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    .highlight-container {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: auto auto;
+      gap: 10px;
+      margin-left: 0;
+      width: 100%;
+    }
+
+    .highlight-row {
+      width: 100%;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      gap: 6px;
+      padding: 16px 10px;
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 16px;
+      border: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    .line { display: none !important; }
+
+    .highlight-icon {
+      display: flex;
+      justify-content: center;
+    }
+
+    .highlight-icon svg {
+      width: 32px;
+      height: 32px;
+      padding: 6px;
+      border-radius: 10px;
+      flex-shrink: 0;
+    }
+
+    .title {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 3px;
+    }
+
+    .name        { font-size: 10px; opacity: 0.7; text-align: center; }
+    .measurement { font-size: 15px; font-weight: 800; text-align: center; }
+  }
+
+  /* ── Cloud image ── */
+  .cloud-image-container {
+    height: 220px;
+    min-height: unset;
+    border-radius: 18px;
+  }
+
+  .cloud-label { font-size: 11px; padding: 12px; }
+
+  /* ── Overview chart ── */
+  .overview-container {
+    height: 220px;
+    min-height: unset;
+    padding: 16px 14px 12px;
+
+    #graph {
+      width: 100%;
+      height: calc(100% - 32px);
+      max-height: 170px;
+    }
+  }
+
+  /* ── About panel ── */
+  .info-content {
+    padding: 20px 16px;
+    font-size: 13px;
+  }
+
+  #details-head-text { font-size: 15px; }
+
+  .team-container {
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    padding: 24px 10px;
+  }
+
+  .team-member {
+    width: 82vw;
+    max-width: 320px;
+    padding: 28px 16px;
+  }
+
+  .team-member img {
+    width: 18vw;
+    height: 18vw;
+    min-width: 72px;
+    min-height: 72px;
+  }
+
+  .team-member h4    { font-size: 15px; }
+  .team-member .role { font-size: 12px; }
+  .team-member .desc { font-size: 12px; }
+
+  /* ── Tooltip ── */
+  .forecast-tooltip {
+    font-size: 11px;
+    max-width: 52vw;
+  }
+}
+
+
+/* ── Small phones (≤ 480px) ── */
+@media only screen and (max-width: 480px) {
+
+  .main-container { padding: 8px; row-gap: 8px; }
+
+  .side-panel-container {
+    padding: 7px 10px;
+    .logo img     { height: 26px; }
+    .website-name { font-size: 10px; }
+    .sideIcon     { width: 18px; height: 18px; }
+  }
+
+  .current-forecast-container {
+    .location  { font-size: 10px; }
+    .condition { font-size: 13px; }
+    .temp      { font-size: 40px; }
+    .forecastImage { max-width: 130px; }
+  }
+
+  .todays-forecast-container .details-container > div {
+    min-height: 88px;
+    font-size: 10px;
+  }
+
+  .todays-highlight-container {
+    .name        { font-size: 9px; }
+    .measurement { font-size: 13px; }
+    .highlight-icon svg { width: 26px; height: 26px; }
+  }
+
+  .cloud-image-container,
+  .overview-container { height: 190px; }
+
+  .team-member { width: 88vw; }
+}
