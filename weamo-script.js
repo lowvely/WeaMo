@@ -120,46 +120,158 @@ setInterval(loadLatestCloudImage, 10000);
 // GRAPH SETUP
 const graph = document.getElementById('graph');
 
-let myChart = new Chart(graph, {
+// let myChart = new Chart(graph, {
+//   type: 'line',
+//   data: {
+//     labels: [],
+//     datasets: [{
+//       data: [],
+//       borderColor: 'orange',
+//       fill: false,
+//       tension: 0.5
+//     }]
+//   },
+//   options: {
+//     responsive: true,
+//     maintainAspectRatio: false,
+//     plugins: { legend: { display: false } },
+//     layout: { padding: 10 },
+//     scales: {
+//       x: {
+//         grid: { display: false },
+//         border:{color: getGridColor()},
+//         ticks: { font: { size: 10 }, color: getFontColor() },
+//         title: {display: true}
+//       },
+//       y: {
+//         beginAtZero: false,
+//         ticks: { font: { size: 10 }, color: getFontColor() },
+//         grid: {display: false},
+//         border: {color: getGridColor()},
+//         title: {
+//           display: true,
+//           text: 'Temperature (°C)',
+//           font: { size: 10 },
+//           color: getFontColor()
+//         }
+//       }
+//     }
+//   }
+// });
+
+// Fetch Laters Weather + update chart
+
+const ctx = graph.getContext('2d');
+
+const gradient = ctx.createLinearGradient(0, 0, 0, 250);
+gradient.addColorStop(0, 'rgba(219, 139, 6, 0.35)');
+gradient.addColorStop(1, 'rgba(219, 139, 6, 0)');
+
+let myChart = new Chart(ctx, {
   type: 'line',
   data: {
     labels: [],
     datasets: [{
       data: [],
-      borderColor: 'orange',
-      fill: false,
-      tension: 0.5
+      borderColor: '#DB8B06',
+      backgroundColor: gradient,
+
+      fill: true,
+      tension: 0.45,
+
+      borderWidth: 3,
+
+      pointRadius: 4,
+      pointHoverRadius: 6,
+
+      pointBackgroundColor: '#DB8B06',
+      pointBorderColor: '#0F172A',
+      pointBorderWidth: 2
     }]
   },
+
   options: {
     responsive: true,
     maintainAspectRatio: false,
-    plugins: { legend: { display: false } },
-    layout: { padding: 10 },
+
+    plugins: {
+      legend: {
+        display: false
+      },
+      tooltip: {
+        backgroundColor: '#121A2C',
+        titleColor: '#fff',
+        bodyColor: '#fff',
+        borderColor: '#DB8B06',
+        borderWidth: 1
+      }
+    },
+
+    interaction: {
+      intersect: false,
+      mode: 'index'
+    },
+
+    layout: {
+      padding: {
+        top: 10,
+        right: 15,
+        left: 10,
+        bottom: 5
+      }
+    },
+
     scales: {
       x: {
-        grid: { display: false },
-        border:{color: getGridColor()},
-        ticks: { font: { size: 10 }, color: getFontColor() },
-        title: {display: true}
+        grid: {
+          display: false
+        },
+
+        border: {
+          display: false
+        },
+
+        ticks: {
+          color: '#94A3B8',
+          font: {
+            size: 11
+          }
+        }
       },
+
       y: {
         beginAtZero: false,
-        ticks: { font: { size: 10 }, color: getFontColor() },
-        grid: {display: false},
-        border: {color: getGridColor()},
+
+        border: {
+          display: false
+        },
+
+        grid: {
+          color: 'rgba(255,255,255,0.08)',
+          drawBorder: false
+        },
+
+        ticks: {
+          color: '#94A3B8',
+          font: {
+            size: 11
+          }
+        },
+
         title: {
           display: true,
           text: 'Temperature (°C)',
-          font: { size: 10 },
-          color: getFontColor()
+          align: 'start',
+          color: '#94A3B8',
+          font: {
+            size: 11
+          }
         }
       }
     }
   }
 });
 
-// Fetch Laters Weather + update chart
 async function updateWeatherFromSupabase() {
   try {
     // Latest data for highlights
@@ -202,36 +314,33 @@ async function updateWeatherFromSupabase() {
       }
     }
 
-    // All data for chart
+    // All data for chart — last hour at 5-min intervals
+    // Last 10 records for chart
     const { data: allData, error: allError } = await supabase
-    .from("weather_data")
-    .select("temperature, created_at")
-    .order("created_at", { ascending: false }) // get latest first
-    .limit(10); // last 10 rows
+      .from("weather_data")
+      .select("temperature, created_at")
+      .order("created_at", { ascending: false })
+      .limit(10); 
 
     if (allError) {
       console.error("Supabase error (graph):", allError);
     } else if (allData && allData.length > 0) {
-      // reverse so chart is oldest → newest
-      const orderedData = allData.reverse();
+      // Reverse because we fetched newest first
+      const chartData = allData.reverse();
 
-      const hourlyMap = new Map();
-
-      orderedData.forEach(row => {
+      const labels = chartData.map(row => {
         const date = new Date(row.created_at);
-        const hourKey = `${date.getHours()}:00`;
 
-        if (!hourlyMap.has(hourKey)) {
-          hourlyMap.set(hourKey, []);
-        }
-
-        hourlyMap.set(hourKey, parseFloat(row.temperature));
+        return date.toLocaleTimeString([], {
+          hour: 'numeric',
+          minute: '2-digit'
+        });
       });
 
-      // convert map to arrays
-      const labels = Array.from(hourlyMap.keys()).reverse();
-      const temps = Array.from(hourlyMap.values()).reverse();
-      
+      const temps = chartData.map(row =>
+        parseFloat(row.temperature)
+      );
+
       myChart.data.labels = labels;
       myChart.data.datasets[0].data = temps;
       myChart.update();
